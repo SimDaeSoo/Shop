@@ -1,5 +1,9 @@
 {
   "login": "Login",
   "logout": "Logout",
-  "register": "Register"
+  "register": "Register",
+  "home": "Home",
+  "new": "New",
+  "sale": "Sale",
+  "category": "Category"
 }

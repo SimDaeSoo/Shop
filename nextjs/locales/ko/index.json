@@ -1,5 +1,9 @@
 {
   "login": "로그인",
   "logout": "로그아웃",
-  "register": "회원가입"
+  "register": "회원가입",
+  "home": "홈",
+  "new": "신상",
+  "sale": "세일",
+  "category": "카테고리"
 }

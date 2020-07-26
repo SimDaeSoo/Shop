@@ -5,3 +5,7 @@ body,
   width: 100%;
   background-color: #f0f2f5;
 }
+
+#__next .ant-carousel .slick-vertical .slick-slide {
+  border: none;
+}
