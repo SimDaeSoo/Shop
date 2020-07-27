@@ -10,8 +10,8 @@ const resource = {
 };
 i18n.use(initReactI18next).init({
   resources: resource,
-  lng: 'en',
-  fallbackLng: 'en',
+  lng: 'ko',
+  fallbackLng: 'ko',
   keySeparator: false,
   interpolation: {
     escapeValue: false

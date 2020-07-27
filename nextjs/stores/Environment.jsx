@@ -15,7 +15,7 @@ class Environment {
         if (this.query[key] !== value) {
             this.query[key] = value;
 
-            if (this.query.language === 'en') delete this.query.language;
+            if (this.query.language === 'ko') delete this.query.language;
             i18n.changeLanguage(this.language);
 
             Router.push(`${Router.route}${this.queryString}`);
@@ -23,7 +23,7 @@ class Environment {
     }
 
     get language() {
-        return this.query.language || 'en';
+        return this.query.language || 'ko';
     }
 
     get queryString() {
