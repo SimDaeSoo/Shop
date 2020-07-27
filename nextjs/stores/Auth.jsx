@@ -18,6 +18,14 @@ class Auth {
     get hasPermission() {
         return (this.jwt && this.user);
     }
+
+    get carried() {
+        return this.user.carried || [];
+    }
+
+    get liked() {
+        return this.user.liked || [];
+    }
 }
 
 export default Auth;

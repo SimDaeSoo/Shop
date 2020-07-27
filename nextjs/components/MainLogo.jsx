@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import Router from 'next/router';
 import { Input, Button, Tag, Avatar, Badge } from 'antd';
-import { GoogleOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { GoogleOutlined, LogoutOutlined, UserOutlined, ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 
 @inject('environment', 'auth')
 @observer
@@ -26,7 +26,7 @@ class MainLogo extends React.Component {
         const { environment, auth, i18n } = this.props;
         return (
             <div style={{ height: '280px', position: 'relative' }}>
-                <img src='https://cdn.searchenginejournal.com/wp-content/uploads/2018/04/e-commerce-store-1520x800.png' style={{ opacity: 0.2, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
+                <img src='https://lh3.googleusercontent.com/proxy/d0swTDXh6AZjstM-a6wdjPeOo6cqK7ML4g4-tRDkv_-EaeyMQjmeIOHX4AouAvSn7n55DFEQhfmTWH1Sk_5WVHZB3wZ6Ljgj0Tmq8HGzFTP6r5Vi_USdrp6kpHZSEAtGZw99Z0hh8sQ' style={{ opacity: 0.2, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
                 <div style={{ position: 'absolute', color: 'white', top: '62px', width: '100%', zIndex: 2, fontSize: '5em', textAlign: 'center', textShadow: '2px 2px 2px gray' }}>
                     <div>Every Wear</div>
                     <div style={{ fontSize: '0.3em' }}>{i18n.t('site_description')}</div>
@@ -55,8 +55,22 @@ class MainLogo extends React.Component {
                         }
                         {
                             auth.hasPermission &&
-                            <Button icon={<LogoutOutlined />} type='danger' onClick={this.logout.bind(this)} style={{ marginRight: '4px' }}>
-                            </Button>
+                            <>
+                                <div style={{ display: 'inline-block', marginRight: '4px' }}>
+                                    <Badge count={auth.carried.length} style={{ zIndex: 2 }} >
+                                        <Button icon={<ShoppingCartOutlined />} type='primary'>
+                                        </Button>
+                                    </Badge>
+                                </div>
+                                <div style={{ display: 'inline-block', marginRight: '4px' }}>
+                                    <Badge count={auth.liked.length} style={{ zIndex: 2 }} >
+                                        <Button icon={<HeartOutlined />} type='primary'>
+                                        </Button>
+                                    </Badge>
+                                </div>
+                                <Button icon={<LogoutOutlined />} type='danger' onClick={this.logout.bind(this)} style={{ marginRight: '4px' }}>
+                                </Button>
+                            </>
                         }
                     </div>
                     {/* <div style={{ display: 'inline-block', marginRight: '8px' }}>

@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "order"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "before_amount": {
+      "type": "integer"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "orders"
+    },
+    "thumbnail_images": {
+      "collection": "photo",
+      "via": "order"
+    },
+    "detail_images": {
+      "collection": "photo",
+      "via": "order"
+    },
+    "stock": {
+      "type": "integer"
+    },
+    "liked_users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "liked_orders",
+      "dominant": true
+    },
+    "carried_users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "carried_orders",
+      "dominant": true
+    }
+  }
+}

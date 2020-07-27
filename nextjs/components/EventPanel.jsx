@@ -8,13 +8,12 @@ import { Carousel } from 'antd';
 class EventPanel extends React.Component {
     render() {
         return (
-            <div className="site-layout-content">
+            <div className="site-layout-content" style={{ marginTop: '10px' }}>
                 <Carousel autoplay dotPosition='left' style={{
                     textAlign: 'center',
                     height: '300px',
                     overflow: 'hidden',
                     borderRadius: '20px',
-                    margin: '20px',
                     boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)'
                 }}>
                     <div>

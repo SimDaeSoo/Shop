@@ -24,7 +24,7 @@ class OrderCard extends React.Component {
     }
 
     render() {
-        const { environment, auth, i18n } = this.props;
+        const { environment, auth, i18n, order } = this.props;
 
         return (
             <Card
@@ -49,23 +49,32 @@ class OrderCard extends React.Component {
                 }
                 actions={[
                     <ShoppingCartOutlined key='addCart' onClick={this.addCart.bind(this)} />,
-                    <HeartOutlined key='like' onClick={this.toggleLike.bind(this)} />
+                    <>
+                        {
+                            true &&
+                            <HeartOutlined key='like' onClick={this.toggleLike.bind(this)} />
+                        }
+                        {
+                            false &&
+                            <HeartFilled />
+                        }
+                    </>
                 ]}
                 onClick={this.detail.bind(this)}
             >
                 <Tag color='magenta' style={{ position: 'absolute', top: '4px', left: '4px' }}>40% Sale</Tag>
                 <Tag style={{ position: 'absolute', top: '4px', right: '4px', margin: 0 }}>daesoo94</Tag>
                 <Card.Meta
-                    title="[another leeds] 쿨 썸머 후드 blouse"
+                    title={order.title}
                     description={
                         <div>
                             <div style={{ textAlign: 'right' }}>
-                                <Tag style={{ textDecoration: 'line-through' }}>54,000 ₩</Tag>
-                                <Tag color='red' style={{ marginRight: 0 }}>37,000 ₩</Tag>
+                                <Tag style={{ textDecoration: 'line-through' }}>{order.before_amount} ₩</Tag>
+                                <Tag color='red' style={{ marginRight: 0 }}>{order.amount} ₩</Tag>
                             </div>
                             <div style={{ marginTop: '4px', fontSize: '0.8em' }}>
-                                완벽한 여리여리 핏의 꾸안꾸 느낌으로 편하고 캐주얼하게 입기 좋은 셔층 롱 원피스. 부드러운 폴리 면 원단을 사용해 시원하고 가볍게 입기 좋고 넉넉한 품과 롱 기장으로 체형 커버에도 딱이에요. 어나더리즈에서만 볼 수 있는 특별한 2가지 컬러로 보여드릴게요!
-                        </div>
+                                {order.description}
+                            </div>
                         </div>
                     }
                 />
