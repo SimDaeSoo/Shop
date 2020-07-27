@@ -9,3 +9,12 @@ body,
 #__next .ant-carousel .slick-vertical .slick-slide {
   border: none;
 }
+
+.imp-dialog {
+  display: none;
+}
+
+.imp-dialog iframe {
+  width: 420px;
+  height: 600px;
+}

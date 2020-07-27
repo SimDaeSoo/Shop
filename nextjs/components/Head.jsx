@@ -31,6 +31,8 @@ class Head extends React.Component {
         <meta property="og:image" content={ogImage || defaultOGImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
       </NextHead>
     )
   }

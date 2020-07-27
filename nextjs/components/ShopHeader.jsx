@@ -13,12 +13,13 @@ class ShopHeader extends React.Component {
         const { i18n } = this.props;
 
         return (
-            <Layout.Header style={{ overflow: 'hidden', background: 'rgba(255,255,255,0.4)', padding: '0', height: '34px', lineHeight: '32px', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' }}>
-                <Menu theme="light" mode="horizontal" selectedKeys={['1']} style={{ height: '32px', backgroundColor: 'transparent' }}>
-                    <Menu.Item key="1" style={HeaderMenuStyle}>
+            <>
+                {/* <Layout.Header style={{ overflow: 'hidden', background: 'rgba(255,255,255,0.4)', padding: '0', height: '34px', lineHeight: '32px', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' }}> */}
+                {/* <Menu theme="light" mode="horizontal" selectedKeys={['1']} style={{ height: '32px', backgroundColor: 'transparent' }}> */}
+                {/* <Menu.Item key="1" style={HeaderMenuStyle}>
                         <HomeOutlined />{i18n.t('home')}
-                    </Menu.Item>
-                    {/* <Menu.Item key="2" style={HeaderMenuStyle}>
+                    </Menu.Item> */}
+                {/* <Menu.Item key="2" style={HeaderMenuStyle}>
                         <StarOutlined />{i18n.t('new')}
                     </Menu.Item>
                     <Menu.Item key="3" style={HeaderMenuStyle}>
@@ -30,8 +31,9 @@ class ShopHeader extends React.Component {
                         <Menu.Item key="7">Option 7</Menu.Item>
                         <Menu.Item key="8">Option 8</Menu.Item>
                     </Menu.SubMenu> */}
-                </Menu>
-            </Layout.Header>
+                {/* </Menu> */}
+                {/* </Layout.Header> */}
+            </>
         );
     }
 }

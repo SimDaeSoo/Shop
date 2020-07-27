@@ -18,7 +18,7 @@ import 'antd/dist/antd.css';
 import Head from '../components/Head';
 
 /* N-Progress */
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 const TopProgressBar = dynamic(() => import('../components/TopProgressBar'), { ssr: false });
 
 class _App extends App {

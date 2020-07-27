@@ -1,14 +1,28 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
+import Router from 'next/router';
 import { Carousel, Card, Tag } from 'antd';
 import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
 
-const CardStyle = { width: 300, margin: '10px', display: 'inline-block', verticalAlign: 'top', textAlign: 'left', border: 'none', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' };
+const CardStyle = { borderRadius: '4px', width: 300, margin: '10px', display: 'inline-block', verticalAlign: 'top', textAlign: 'left', border: 'none', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' };
 
 @inject('environment', 'auth')
 @observer
-class ItemCard extends React.Component {
+class OrderCard extends React.Component {
+    detail(e) {
+        e.prevent
+        Router.push(`/order/${1}`);
+    }
+
+    toggleLike(e) {
+        e.stopPropagation();
+    }
+
+    addCart(e) {
+        e.stopPropagation();
+    }
+
     render() {
         const { environment, auth, i18n } = this.props;
 
@@ -23,20 +37,21 @@ class ItemCard extends React.Component {
                         overflow: 'hidden',
                     }}>
                         <div>
-                            <img src="https://cdn.crewbi.com/images/goods_img/20190812/347455/347455_a_500.jpg" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                            {/* <img src="https://cdn.crewbi.com/images/goods_img/20190812/347455/347455_a_500.jpg" style={{ width: '100%', height: '300px', objectFit: 'cover' }} /> */}
                         </div>
                         <div>
-                            <img src="https://usercontents-c.styleshare.io/images/20428940/700x432" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                            {/* <img src="https://usercontents-c.styleshare.io/images/20428940/700x432" style={{ width: '100%', height: '300px', objectFit: 'cover' }} /> */}
                         </div>
                         <div>
-                            <img src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                            {/* <img src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{ width: '100%', height: '300px', objectFit: 'cover' }} /> */}
                         </div>
                     </Carousel>
                 }
                 actions={[
-                    <ShoppingCartOutlined key='addCart' />,
-                    <HeartOutlined key='like' />
+                    <ShoppingCartOutlined key='addCart' onClick={this.addCart.bind(this)} />,
+                    <HeartOutlined key='like' onClick={this.toggleLike.bind(this)} />
                 ]}
+                onClick={this.detail.bind(this)}
             >
                 <Tag color='magenta' style={{ position: 'absolute', top: '4px', left: '4px' }}>40% Sale</Tag>
                 <Tag style={{ position: 'absolute', top: '4px', right: '4px', margin: 0 }}>daesoo94</Tag>
@@ -59,4 +74,4 @@ class ItemCard extends React.Component {
     }
 }
 
-export default withTranslation('ItemCard')(ItemCard);
+export default withTranslation('OrderCard')(OrderCard);
