@@ -12,7 +12,7 @@ class Auth {
     @action logout() {
         this.jwt = '';
         this.user = {};
-        if (process.browser) document.cookie = 'jwt=;';
+        if (process.browser) this._setCookie('jwt', '');
     }
 
     get hasPermission() {
@@ -25,6 +25,15 @@ class Auth {
 
     get liked() {
         return this.user.liked_orders || [];
+    }
+
+    _getCookie(name) {
+        name = new RegExp(name + '=([^;]*)');
+        return name.test(document.cookie) ? unescape(RegExp.$1) : '';
+    }
+
+    _setCookie(name, value, d) {
+        document.cookie = name + '=' + escape(value) + '; path=/' + (d ? '; expires=' + (function (t) { t.setDate(t.getDate() + d); return t })(new Date).toGMTString() : '');
     }
 }
 

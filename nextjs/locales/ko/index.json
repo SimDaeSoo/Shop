@@ -13,5 +13,7 @@
   "like": "좋아요",
   "carry": "찜",
   "everywear": "에브리웨어",
-  "search_description": "원하는 옷을 검색해보세요!"
+  "search_description": "원하는 옷을 검색해보세요!",
+  "detail": "상세",
+  "info": "정보"
 }

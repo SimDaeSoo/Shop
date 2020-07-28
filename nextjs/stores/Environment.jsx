@@ -8,6 +8,7 @@ class Environment {
 
     constructor(initializeData) {
         this.query = initializeData.query;
+        delete this.query.id;
         i18n.changeLanguage(this.language);
     }
 
@@ -17,8 +18,7 @@ class Environment {
 
             if (this.query.language === 'ko') delete this.query.language;
             i18n.changeLanguage(this.language);
-
-            Router.push(`${Router.route}${this.queryString}`);
+            Router.push(`${Router.asPath.split('?')[0]}${this.queryString}`);
         }
     }
 

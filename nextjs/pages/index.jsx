@@ -3,8 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import { initialize } from '../utils';
 import OrderCard from '../components/OrderCard';
-import ShopHeader from '../components/ShopHeader';
-import MainLogo from '../components/MainLogo';
+import MainHeader from '../components/MainHeader';
 import EventPanel from '../components/EventPanel';
 import { Layout, message } from 'antd';
 import axios from 'axios';
@@ -49,8 +48,7 @@ class Home extends React.Component {
         const { orders } = this.state;
         return (
             <Layout className="layout" style={{ maxWidth: '1280px', width: '100%', margin: 'auto' }}>
-                <MainLogo />
-                <ShopHeader />
+                <MainHeader showSearch={true} />
                 <Layout.Content>
                     <EventPanel />
                     <div style={{ display: 'inline-block', textAlign: 'center', width: '100%' }}>

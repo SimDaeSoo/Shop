@@ -2,8 +2,10 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import { initialize } from '../../utils';
-import { Button } from 'antd';
+import { Button, Layout, Divider, Drawer, message } from 'antd';
 import axios from 'axios';
+import MainHeader from '../../components/MainHeader';
+import i18n from '../../locales/i18n';
 
 @inject('environment', 'auth')
 @observer
@@ -14,7 +16,7 @@ class OrderDetail extends React.Component {
             this.initialize();
         }
         const { order } = this.props;
-        this.state = { order };
+        this.state = { order, visible: false };
     }
 
     initialize() {
@@ -23,6 +25,8 @@ class OrderDetail extends React.Component {
     }
 
     pay() {
+        this.setState({ visible: true });
+
         IMP.request_pay({
             pg: "kakao",
             pay_method: "card",
@@ -36,19 +40,31 @@ class OrderDetail extends React.Component {
             buyer_postcode: "01181"
         }, (rsp) => {
             if (rsp.success) {
+                message.success('결제 성공했습니다');
+                this.setState({ visible: false });
             } else {
+                message.error('결제 실패했습니다');
+                this.setState({ visible: false });
             }
         });
     }
 
     render() {
-        const { order } = this.state;
+        const { order, visible } = this.state;
         return (
-            <div>
-                {JSON.stringify(order)}
-                <span>상세페이지 작업해야함.</span>
-                <Button type='primary' onClick={this.pay.bind(this)}>Kakao Pay 테스트</Button>
-            </div>
+            <Layout className="layout" style={{ maxWidth: '1280px', width: '100%', margin: 'auto' }}>
+                <MainHeader showSearch={false} />
+                <Layout.Content>
+                    <div className='contents' style={{ marginTop: '24px', backgroundColor: '#ffffff', borderRadius: '8px' }}>
+                        <Divider>{i18n.t('detail')} {i18n.t('info')}</Divider>
+                        {JSON.stringify(order)}
+                        <span>상세페이지 작업해야함.</span>
+                        <Button type='primary' onClick={this.pay.bind(this)}>Kakao Pay 테스트</Button>
+                    </div>
+                </Layout.Content>
+                <Layout.Footer style={{ textAlign: 'center', padding: '10 0px' }}>EveryWear ©2020 Created by SCH</Layout.Footer>
+                <Drawer width={460} visible={visible} closable={false} maskClosable={false} />
+            </Layout >
         );
     }
 }

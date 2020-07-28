@@ -35,7 +35,7 @@ class _App extends App {
                 <TopProgressBar />
                 <I18nextProvider i18n={i18n}>
                     <Provider {...this.store}>
-                        <Head />
+                        <Head title='Every Wear' />
                         <Component {...pageProps} />
                     </Provider>
                 </I18nextProvider>

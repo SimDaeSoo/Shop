@@ -11,9 +11,9 @@ const CardStyle = { borderRadius: '4px', width: 300, margin: '10px', display: 'i
 @observer
 class OrderCard extends React.Component {
     detail(e) {
-        const { order } = this.props;
+        const { environment, order } = this.props;
         e.stopPropagation();
-        Router.push(`/order/${order.id}`);
+        Router.push(`/order/${order.id}${environment.queryString}`);
     }
 
     toggleLike(e) {
