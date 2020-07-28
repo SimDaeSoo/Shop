@@ -16,9 +16,7 @@ body,
 
 .imp-dialog iframe {
   z-index: 2000;
-  left: auto !important;
-  right: 0 !important;
-  width: 460px !important;
+  width: 100% !important;
   height: 100% !important;
   position: fixed !important;
 }

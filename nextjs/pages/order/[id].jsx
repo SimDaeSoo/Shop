@@ -2,9 +2,10 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import { initialize } from '../../utils';
-import { Button, Layout, Divider, Drawer, message } from 'antd';
+import { Button, Layout, Divider, message } from 'antd';
 import axios from 'axios';
 import MainHeader from '../../components/MainHeader';
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import i18n from '../../locales/i18n';
 
 @inject('environment', 'auth')
@@ -16,7 +17,7 @@ class OrderDetail extends React.Component {
             this.initialize();
         }
         const { order } = this.props;
-        this.state = { order, visible: false };
+        this.state = { order };
     }
 
     initialize() {
@@ -25,6 +26,7 @@ class OrderDetail extends React.Component {
     }
 
     pay() {
+        disablePageScroll();
         this.setState({ visible: true });
 
         IMP.request_pay({
@@ -41,10 +43,10 @@ class OrderDetail extends React.Component {
         }, (rsp) => {
             if (rsp.success) {
                 message.success('결제 성공했습니다');
-                this.setState({ visible: false });
+                enablePageScroll();
             } else {
                 message.error('결제 실패했습니다');
-                this.setState({ visible: false });
+                enablePageScroll();
             }
         });
     }
@@ -63,7 +65,6 @@ class OrderDetail extends React.Component {
                     </div>
                 </Layout.Content>
                 <Layout.Footer style={{ textAlign: 'center', padding: '10 0px' }}>EveryWear ©2020 Created by SCH</Layout.Footer>
-                <Drawer width={460} visible={visible} closable={false} maskClosable={false} />
             </Layout >
         );
     }
