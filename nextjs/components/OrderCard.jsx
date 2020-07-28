@@ -89,16 +89,14 @@ class OrderCard extends React.Component {
                     title={order.title}
                     description={
                         <div>
-                            <div style={{ position: 'absolute', top: '250px', left: 0, width: '100%', display: 'block', textAlign: 'right' }}>
-                                {
-                                    order.before_amount !== order.amount &&
-                                    <div>
-                                        <Tag style={{ textDecoration: 'line-through', marginRight: '4px' }}>{order.before_amount} ₩</Tag>
-                                    </div>
-                                }
-                                <div>
-                                    <Tag color='red' style={{ marginRight: '4px' }}>{order.amount} ₩</Tag>
+                            {
+                                order.before_amount !== order.amount &&
+                                <div style={{ position: 'absolute', top: '250px', left: 0, width: '100%', display: 'block', textAlign: 'right', height: '46px' }}>
+                                    <Tag style={{ textDecoration: 'line-through', marginRight: '4px' }}>{order.before_amount} ₩</Tag>
                                 </div>
+                            }
+                            <div style={{ position: 'absolute', top: '273px', left: 0, width: '100%', display: 'block', textAlign: 'right', height: '46px' }}>
+                                <Tag color='red' style={{ marginRight: '4px' }}>{order.amount} ₩</Tag>
                             </div>
                             <div style={{ marginTop: '4px', fontSize: '0.8em', minHeight: '68px' }}>
                                 {order.description.length >= 120 ? `${order.description.slice(0, 120)}...` : order.description}

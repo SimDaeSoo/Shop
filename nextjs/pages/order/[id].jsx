@@ -62,11 +62,13 @@ class OrderDetail extends React.Component {
                         {/* {JSON.stringify(order)} */}
                         <Button type='primary' onClick={this.pay.bind(this)}>Kakao Pay 테스트</Button>
                         <Divider>{i18n.t('detail')} {i18n.t('info')}</Divider>
-                        {
-                            order.detail_images.map((image, index) => {
-                                return <img src={image.url} key={index} style={{ width: '100%', height: 'auto' }} />
-                            })
-                        }
+                        <div style={{ width: '100%', margin: 'auto', maxWidth: '1024px' }}>
+                            {
+                                order.detail_images.map((image, index) => {
+                                    return <img src={image.url} key={index} style={{ width: '100%', height: 'auto' }} />
+                                })
+                            }
+                        </div>
                     </div>
                 </Layout.Content>
                 <Layout.Footer style={{ textAlign: 'center', padding: '10 0px' }}>EveryWear ©2020 Created by SCH</Layout.Footer>
