@@ -36,7 +36,7 @@ services:
       - DATABASE_NAME=strapi
       - DATABASE_USERNAME=daesoo94
       - DATABASE_PASSWORD=vndtkstla2
-      - BASE_URL=http://localhost
+      - BASE_URL=http://www.everywear.site
     depends_on:
       - mysql
     ports:
