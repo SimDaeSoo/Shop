@@ -37,7 +37,7 @@ class MainHeader extends React.Component {
             <div style={{ height: '280px', position: 'relative' }}>
                 <img src='/uploads/3_0_RGB_7e3e62cf0d.png' style={{ opacity: 0.2, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
 
-                <div style={{ position: 'absolute', color: 'white', top: '52px', width: '100%', zIndex: 2, fontSize: '5em', textAlign: 'center', textShadow: '2px 2px 2px gray' }} onClick={this.goHome.bind(this)}>
+                <div style={{ position: 'absolute', color: 'white', top: '58px', width: '100%', zIndex: 2, fontSize: '5em', textAlign: 'center', textShadow: '2px 2px 2px gray' }} onClick={this.goHome.bind(this)}>
                     <div>{i18n.t('everywear')}</div>
                     <div style={{ fontSize: '0.3em' }}>{i18n.t('site_description')}</div>
                 </div>
