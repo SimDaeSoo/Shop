@@ -5,9 +5,8 @@ import { initialize } from '../../utils';
 import { Button, Layout, Divider, message } from 'antd';
 import axios from 'axios';
 import MainHeader from '../../components/MainHeader';
-import { disablePageScroll, enablePageScroll } from 'scroll-lock';
+import { disablePageScroll, enablePageScroll, getScrollState } from 'scroll-lock';
 import i18n from '../../locales/i18n';
-import OrderCard from '../../components/OrderCard';
 
 @inject('environment', 'auth')
 @observer
@@ -28,8 +27,7 @@ class OrderDetail extends React.Component {
 
     pay() {
         disablePageScroll();
-        this.setState({ visible: true });
-
+        window.scrollTo(0, 0);
         IMP.request_pay({
             pg: "kakao",
             pay_method: "card",
