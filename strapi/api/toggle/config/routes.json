@@ -1,0 +1,10 @@
+{
+  "routes": [{
+    "method": "POST",
+    "path": "/toggle",
+    "handler": "toggle.index",
+    "config": {
+      "policies": []
+    }
+  }]
+}

@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import { initialize } from '../../utils';
 import { Button } from 'antd';
+import axios from 'axios';
 
 @inject('environment', 'auth')
 @observer
@@ -12,6 +13,8 @@ class OrderDetail extends React.Component {
         if (process.browser) {
             this.initialize();
         }
+        const { order } = this.props;
+        this.state = { order };
     }
 
     initialize() {
@@ -39,18 +42,26 @@ class OrderDetail extends React.Component {
     }
 
     render() {
+        const { order } = this.state;
         return (
             <div>
-                Hello World?
-                <Button type='primary' onClick={this.pay.bind(this)}>test</Button>
+                {JSON.stringify(order)}
+                <span>상세페이지 작업해야함.</span>
+                <Button type='primary' onClick={this.pay.bind(this)}>Kakao Pay 테스트</Button>
             </div>
         );
     }
 }
 
+async function getOrder(id) {
+    const response = await axios.get(`${process.env.SSR_API_URL}/orders/${id}`);
+    return response.data || {};
+}
+
 export async function getServerSideProps(context) {
     const initializeData = await initialize(context);
-    return { props: { initializeData } };
+    const order = await getOrder(context.query.id);
+    return { props: { initializeData, order } };
 }
 
 export default withTranslation('OrderDetail')(OrderDetail);

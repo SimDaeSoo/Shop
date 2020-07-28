@@ -28,11 +28,11 @@
     },
     "thumbnail_images": {
       "collection": "photo",
-      "via": "order"
+      "via": "thumbnaile_order"
     },
     "detail_images": {
       "collection": "photo",
-      "via": "order"
+      "via": "detail_order"
     },
     "stock": {
       "type": "integer"

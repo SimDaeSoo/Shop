@@ -20,11 +20,11 @@ class Auth {
     }
 
     get carried() {
-        return this.user.carried || [];
+        return this.user.carried_orders || [];
     }
 
     get liked() {
-        return this.user.liked || [];
+        return this.user.liked_orders || [];
     }
 }
 

@@ -6,7 +6,12 @@
   "new": "New",
   "sale": "Sale",
   "category": "Category",
-  "site_description": "Quickly and easily make your clothes anytime, anywhere!",
+  "site_description": "Quickly and easily make your clothes",
   "korean": "Korean",
-  "english": "English"
+  "english": "English",
+  "stock": "Stock",
+  "like": "Like",
+  "carry": "Carry",
+  "everywear": "Every Wear",
+  "search_description": "Search the clothes you want!"
 }

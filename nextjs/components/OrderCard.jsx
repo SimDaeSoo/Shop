@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import Router from 'next/router';
 import { Carousel, Card, Tag } from 'antd';
-import { ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
+import { ShoppingOutlined, ShoppingFilled, HeartOutlined, HeartFilled, DropboxOutlined } from '@ant-design/icons';
 
 const CardStyle = { borderRadius: '4px', width: 300, margin: '10px', display: 'inline-block', verticalAlign: 'top', textAlign: 'left', border: 'none', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' };
 
@@ -11,65 +11,89 @@ const CardStyle = { borderRadius: '4px', width: 300, margin: '10px', display: 'i
 @observer
 class OrderCard extends React.Component {
     detail(e) {
-        e.prevent
-        Router.push(`/order/${1}`);
+        const { order } = this.props;
+        e.stopPropagation();
+        Router.push(`/order/${order.id}`);
     }
 
     toggleLike(e) {
+        const { toggle, order } = this.props;
         e.stopPropagation();
+        if (toggle) toggle('like', order.id);
     }
 
-    addCart(e) {
+    toggleCarry(e) {
+        const { toggle, order } = this.props;
         e.stopPropagation();
+        if (toggle) toggle('carry', order.id);
+    }
+
+    get isLiked() {
+        const { order, auth } = this.props;
+        const ids = order.liked_users.map(user => Number(user.id));
+        return ids.indexOf(auth.user.id || -1) >= 0;
+    }
+
+    get isCarried() {
+        const { order, auth } = this.props;
+        const ids = order.carried_users.map(user => Number(user.id));
+        return ids.indexOf(auth.user.id || -1) >= 0;
     }
 
     render() {
-        const { environment, auth, i18n, order } = this.props;
+        const { i18n, order } = this.props;
 
         return (
             <Card
                 hoverable
                 style={CardStyle}
                 cover={
-                    <Carousel autoplay style={{
-                        textAlign: 'center',
-                        height: '300px',
-                        overflow: 'hidden',
-                    }}>
-                        <div>
-                            {/* <img src="https://cdn.crewbi.com/images/goods_img/20190812/347455/347455_a_500.jpg" style={{ width: '100%', height: '300px', objectFit: 'cover' }} /> */}
-                        </div>
-                        <div>
-                            {/* <img src="https://usercontents-c.styleshare.io/images/20428940/700x432" style={{ width: '100%', height: '300px', objectFit: 'cover' }} /> */}
-                        </div>
-                        <div>
-                            {/* <img src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{ width: '100%', height: '300px', objectFit: 'cover' }} /> */}
-                        </div>
-                    </Carousel>
+                    <div style={{ height: '300px' }}>
+                        <Carousel autoplay style={{
+                            textAlign: 'center',
+                            height: '300px',
+                            overflow: 'hidden',
+                        }}>
+                            {
+                                order.thumbnail_images.map((image) => {
+                                    return <div key={image.id}><img src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} /></div>;
+                                })
+                            }
+                        </Carousel>
+                    </div>
                 }
                 actions={[
-                    <ShoppingCartOutlined key='addCart' onClick={this.addCart.bind(this)} />,
-                    <>
-                        {
-                            true &&
-                            <HeartOutlined key='like' onClick={this.toggleLike.bind(this)} />
-                        }
-                        {
-                            false &&
-                            <HeartFilled />
-                        }
-                    </>
+                    <div onClick={(e) => e.stopPropagation()} key='stock'>
+                        <DropboxOutlined style={{ color: '#17A589' }} />
+                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: '#17A589' }}>{order.stock} {i18n.t('stock')}</span>
+                    </ div>,
+                    <div onClick={this.toggleCarry.bind(this)} key='addCart'>
+                        {!this.isCarried && <ShoppingOutlined />}
+                        {this.isCarried && <ShoppingFilled style={{ color: '#03A9F4' }} />}
+                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isCarried ? '#03A9F4' : '' }}>{order.carried_users.length} {i18n.t('carry')}</span>
+                    </div>,
+                    <div onClick={this.toggleLike.bind(this)} key='like'>
+                        {!this.isLiked && <HeartOutlined />}
+                        {this.isLiked && <HeartFilled style={{ color: '#EC407A' }} />}
+                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isLiked ? '#EC407A' : '' }}>{order.liked_users.length} {i18n.t('like')}</span>
+                    </div>
                 ]}
                 onClick={this.detail.bind(this)}
             >
-                <Tag color='magenta' style={{ position: 'absolute', top: '4px', left: '4px' }}>40% Sale</Tag>
-                <Tag style={{ position: 'absolute', top: '4px', right: '4px', margin: 0 }}>daesoo94</Tag>
+                {
+                    order.before_amount !== order.amount &&
+                    <Tag color='magenta' style={{ position: 'absolute', top: '4px', left: '4px' }}>{Math.round((order.before_amount - order.amount) / order.before_amount * 100)}% Sale</Tag>
+                }
+                <Tag color='orange' style={{ position: 'absolute', top: '4px', right: '4px', margin: 0 }}>#{order.user.username}</Tag>
                 <Card.Meta
                     title={order.title}
                     description={
                         <div>
                             <div style={{ textAlign: 'right' }}>
-                                <Tag style={{ textDecoration: 'line-through' }}>{order.before_amount} ₩</Tag>
+                                {
+                                    order.before_amount !== order.amount &&
+                                    <Tag style={{ textDecoration: 'line-through' }}>{order.before_amount} ₩</Tag>
+                                }
                                 <Tag color='red' style={{ marginRight: 0 }}>{order.amount} ₩</Tag>
                             </div>
                             <div style={{ marginTop: '4px', fontSize: '0.8em' }}>

@@ -15,7 +15,11 @@
     "url": {
       "type": "string"
     },
-    "order": {
+    "thumbnaile_order": {
+      "via": "thumbnail_images",
+      "model": "order"
+    },
+    "detail_order": {
       "via": "detail_images",
       "model": "order"
     }

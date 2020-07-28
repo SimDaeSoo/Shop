@@ -8,5 +8,10 @@
   "category": "카테고리",
   "site_description": "당신의 옷을 언제 어디서나 쉽고 빠르게!",
   "korean": "한국어",
-  "english": "영어"
+  "english": "영어",
+  "stock": "개",
+  "like": "좋아요",
+  "carry": "찜",
+  "everywear": "에브리웨어",
+  "search_description": "원하는 옷을 검색해보세요!"
 }
