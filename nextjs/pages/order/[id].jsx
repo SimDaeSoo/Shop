@@ -7,6 +7,7 @@ import axios from 'axios';
 import MainHeader from '../../components/MainHeader';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import i18n from '../../locales/i18n';
+import OrderCard from '../../components/OrderCard';
 
 @inject('environment', 'auth')
 @observer
@@ -57,11 +58,15 @@ class OrderDetail extends React.Component {
             <Layout className="layout" style={{ maxWidth: '1280px', width: '100%', margin: 'auto' }}>
                 <MainHeader showSearch={false} />
                 <Layout.Content>
-                    <div className='contents' style={{ marginTop: '24px', backgroundColor: '#ffffff', borderRadius: '8px' }}>
-                        <Divider>{i18n.t('detail')} {i18n.t('info')}</Divider>
-                        {JSON.stringify(order)}
-                        <span>상세페이지 작업해야함.</span>
+                    <div className='contents' style={{ marginTop: '24px', backgroundColor: '#ffffff', borderRadius: '8px', padding: '32px' }}>
+                        {/* {JSON.stringify(order)} */}
                         <Button type='primary' onClick={this.pay.bind(this)}>Kakao Pay 테스트</Button>
+                        <Divider>{i18n.t('detail')} {i18n.t('info')}</Divider>
+                        {
+                            order.detail_images.map((image, index) => {
+                                return <img src={image.url} key={index} style={{ width: '100%', height: 'auto' }} />
+                            })
+                        }
                     </div>
                 </Layout.Content>
                 <Layout.Footer style={{ textAlign: 'center', padding: '10 0px' }}>EveryWear ©2020 Created by SCH</Layout.Footer>

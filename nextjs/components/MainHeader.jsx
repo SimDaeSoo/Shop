@@ -35,7 +35,7 @@ class MainHeader extends React.Component {
         const { environment, auth, i18n, showSearch } = this.props;
         return (
             <div style={{ height: '280px', position: 'relative' }}>
-                <img src='/uploads/3_0_RGB_7e3e62cf0d.png' style={{ opacity: 0.2, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
+                <img src='/assets/logo.jpg' style={{ opacity: 0.2, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
 
                 <div style={{ position: 'absolute', color: 'white', top: '58px', width: '100%', zIndex: 2, fontSize: '5em', textAlign: 'center', textShadow: '2px 2px 2px gray' }} onClick={this.goHome.bind(this)}>
                     <div>{i18n.t('everywear')}</div>
@@ -44,8 +44,8 @@ class MainHeader extends React.Component {
 
                 {
                     showSearch &&
-                    <div style={{ position: 'absolute', bottom: '24px', width: '50%', marginLeft: '25%', zIndex: 2 }}>
-                        <Input.Search placeholder={i18n.t('search_description')} onSearch={value => console.log(value)} enterButton />
+                    <div style={{ position: 'absolute', width: '100%', textAlign: 'center', bottom: '24px', zIndex: 2 }}>
+                        <Input.Search style={{ width: '80%', maxWidth: '800px' }} placeholder={i18n.t('search_description')} onSearch={value => console.log(value)} enterButton />
                     </div>
                 }
 

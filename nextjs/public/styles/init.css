@@ -10,8 +10,14 @@ body,
   border: none;
 }
 
+.imp-dialog .payment-kakaopay {
+  display: block !important;
+}
+
 .imp-dialog {
   display: none;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .imp-dialog iframe {
