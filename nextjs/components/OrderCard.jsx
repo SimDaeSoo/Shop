@@ -51,7 +51,7 @@ class OrderCard extends React.Component {
                 style={CardStyle}
                 cover={
                     <div style={{ height: '300px' }}>
-                        <LazyLoad height={300} key={image.id}>
+                        <LazyLoad height={300}>
                             <Carousel autoplay style={{
                                 textAlign: 'center',
                                 height: '300px',
@@ -60,7 +60,7 @@ class OrderCard extends React.Component {
                                 {
                                     order.thumbnail_images.map((image) => {
                                         return (
-                                            <img src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                                            <img key={image.id} src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
                                         )
                                     })
                                 }
