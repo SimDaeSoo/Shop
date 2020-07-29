@@ -44,7 +44,8 @@ class OrderDetail extends React.Component {
             // buyer_postcode: "01181"
         }, async (rsp) => {
             if (rsp.success) {
-                const buyResponse = await axios.post(`/api/orders/${order.id}/buy`, { quantity });
+                const headers = { Authorization: `bearer ${auth.jwt}` };
+                const buyResponse = await axios.post(`/api/orders/${order.id}/buy`, { quantity }, { headers });
                 const responseOrder = buyResponse.data;
                 this.setState({ order: responseOrder });
 
