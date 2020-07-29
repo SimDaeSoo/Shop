@@ -133,7 +133,7 @@ class OrderDetail extends React.Component {
                                     {this.isLiked && <HeartFilled style={{ color: '#EC407A' }} />}
                                     <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isLiked ? '#EC407A' : '' }}>{order.liked_users.length} {i18n.t('like')}</span>
                                 </Button>
-                                <Button type='primary' onClick={this.pay.bind(this)} style={{ width: '120px' }} disabled={auth.hasPermission}>
+                                <Button type='primary' onClick={this.pay.bind(this)} style={{ width: '120px' }} disabled={!auth.hasPermission}>
                                     <GiftOutlined />
                                     바로 구매
                                 </Button>
