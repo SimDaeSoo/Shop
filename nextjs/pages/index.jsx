@@ -14,8 +14,8 @@ import axios from 'axios';
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        const { orders } = this.props;
-        this.state = { orders };
+        const { orders, events } = this.props;
+        this.state = { orders, events };
     }
 
     async toggle(type, orderId) {
@@ -45,12 +45,12 @@ class Home extends React.Component {
     }
 
     render() {
-        const { orders } = this.state;
+        const { orders, events } = this.state;
         return (
             <Layout className="layout" style={{ maxWidth: '1280px', width: '100%', margin: 'auto' }}>
                 <MainHeader showSearch={true} />
                 <Layout.Content>
-                    <EventPanel />
+                    <EventPanel events={events} />
                     <div style={{ display: 'inline-block', textAlign: 'center', width: '100%' }}>
                         {
                             orders && orders.map((order) => {
@@ -65,7 +65,7 @@ class Home extends React.Component {
     }
 }
 
-async function getOrders() {
+async function getData() {
     const query = `
         query {
             orders {
@@ -91,19 +91,27 @@ async function getOrders() {
                     id
                 }
             }
+            events {
+                id
+                title
+                description
+                thumbnail
+                begin
+                end
+            }
         }
     `;
 
     const response = await axios.post(`${process.env.SSR_API_URL}/graphql`, { query });
     const { data } = response.data || {};
-    const { orders } = data || [];
-    return orders;
+    const { orders, events } = data;
+    return { orders: orders || [], events: events || [] };
 }
 
 export async function getServerSideProps(context) {
     const initializeData = await initialize(context);
-    const orders = await getOrders();
-    return { props: { initializeData, orders } };
+    const { orders, events } = await getData();
+    return { props: { initializeData, orders, events } };
 }
 
 export default withTranslation('Home')(Home);

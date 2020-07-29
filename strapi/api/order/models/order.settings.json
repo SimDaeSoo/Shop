@@ -26,13 +26,9 @@
       "model": "user",
       "via": "orders"
     },
-    "thumbnail_images": {
-      "collection": "photo",
-      "via": "thumbnaile_order"
-    },
     "detail_images": {
-      "collection": "photo",
-      "via": "detail_order"
+      "via": "detail_order",
+      "collection": "photo"
     },
     "stock": {
       "type": "integer"
@@ -48,6 +44,10 @@
       "collection": "user",
       "via": "carried_orders",
       "dominant": true
+    },
+    "thumbnail_images": {
+      "via": "thumbnail_order",
+      "collection": "photo"
     }
   }
 }

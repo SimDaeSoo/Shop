@@ -15,13 +15,13 @@
     "url": {
       "type": "string"
     },
-    "thumbnaile_order": {
-      "via": "thumbnail_images",
-      "model": "order"
+    "thumbnail_order": {
+      "model": "order",
+      "via": "thumbnail_images"
     },
     "detail_order": {
-      "via": "detail_images",
-      "model": "order"
+      "model": "order",
+      "via": "detail_images"
     }
   }
 }

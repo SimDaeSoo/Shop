@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { stringify } from 'querystring';
 
+export function commaFormat(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export async function initialize(context) {
     const { query } = _seperateAuthQuery(context.query || {});
     const { jwt, user } = await _auth(context);

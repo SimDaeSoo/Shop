@@ -26,19 +26,21 @@ class OrderDetail extends React.Component {
     }
 
     pay() {
+        const { auth } = this.props;
+        const { order } = this.state;
         disablePageScroll();
         window.scrollTo(0, 0);
         IMP.request_pay({
             pg: "kakao",
             pay_method: "card",
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: "주문명: 결제 테스트'",
-            amount: 100,
-            buyer_email: "tlaeotn123@gmail.com",
-            buyer_name: "심대수",
-            buyer_tel: "010-3192-8053",
-            buyer_addr: "서울특별시 성북구 보문동",
-            buyer_postcode: "01181"
+            name: `주문 : ${order.title}`,
+            amount: order.amount,
+            buyer_email: auth.user.email,
+            buyer_name: auth.user.username,
+            // buyer_tel: "010-3192-8053",
+            // buyer_addr: "서울특별시 성북구 보문동",
+            // buyer_postcode: "01181"
         }, (rsp) => {
             if (rsp.success) {
                 message.success('결제 성공했습니다');

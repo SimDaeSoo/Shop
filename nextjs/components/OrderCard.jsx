@@ -4,6 +4,8 @@ import { withTranslation } from "react-i18next";
 import Router from 'next/router';
 import { Carousel, Card, Tag } from 'antd';
 import { ShoppingOutlined, ShoppingFilled, HeartOutlined, HeartFilled, DropboxOutlined } from '@ant-design/icons';
+import LazyLoad from 'react-lazyload';
+import { commaFormat } from '../utils';
 
 const CardStyle = { borderRadius: '4px', width: 300, margin: '10px', display: 'inline-block', verticalAlign: 'top', textAlign: 'left', border: 'none', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' };
 
@@ -56,11 +58,15 @@ class OrderCard extends React.Component {
                         }}>
                             {
                                 order.thumbnail_images.map((image) => {
-                                    return <div key={image.id}><img src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} /></div>;
+                                    return (
+                                        <LazyLoad height={300} key={image.id}>
+                                            <img src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                                        </LazyLoad>
+                                    )
                                 })
                             }
                         </Carousel>
-                    </div>
+                    </ div>
                 }
                 actions={[
                     <div onClick={(e) => e.stopPropagation()} key='stock'>
@@ -92,11 +98,11 @@ class OrderCard extends React.Component {
                             {
                                 order.before_amount !== order.amount &&
                                 <div style={{ position: 'absolute', top: '250px', left: 0, width: '100%', display: 'block', textAlign: 'right', height: '46px' }}>
-                                    <Tag style={{ textDecoration: 'line-through', marginRight: '4px' }}>{order.before_amount} ₩</Tag>
+                                    <Tag style={{ textDecoration: 'line-through', marginRight: '4px' }}>{commaFormat(order.before_amount)} ₩</Tag>
                                 </div>
                             }
                             <div style={{ position: 'absolute', top: '273px', left: 0, width: '100%', display: 'block', textAlign: 'right', height: '46px' }}>
-                                <Tag color='red' style={{ marginRight: '4px' }}>{order.amount} ₩</Tag>
+                                <Tag color='red' style={{ marginRight: '4px' }}>{commaFormat(order.amount)} ₩</Tag>
                             </div>
                             <div style={{ marginTop: '4px', fontSize: '0.8em', minHeight: '68px' }}>
                                 {order.description.length >= 120 ? `${order.description.slice(0, 120)}...` : order.description}
