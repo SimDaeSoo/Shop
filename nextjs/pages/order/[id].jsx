@@ -2,8 +2,8 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import { initialize, commaFormat } from '../../utils';
-import { Button, Layout, Divider, message, Row, Col, Carousel, Radio, InputNumber } from 'antd';
-import { ShoppingOutlined, ShoppingFilled, HeartOutlined, HeartFilled, DropboxOutlined, GiftOutlined } from '@ant-design/icons';
+import { Button, Layout, Divider, message, Row, Col, Carousel, Radio, InputNumber, Tag } from 'antd';
+import { ShoppingOutlined, ShoppingFilled, HeartOutlined, HeartFilled, GiftOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import MainHeader from '../../components/MainHeader';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
@@ -42,8 +42,12 @@ class OrderDetail extends React.Component {
             // buyer_tel: "010-3192-8053",
             // buyer_addr: "서울특별시 성북구 보문동",
             // buyer_postcode: "01181"
-        }, (rsp) => {
+        }, async (rsp) => {
             if (rsp.success) {
+                const buyResponse = await axios.post(`/api/orders/${order.id}/buy`, { quantity });
+                const responseOrder = buyResponse.data;
+                this.setState({ order: responseOrder });
+
                 message.success('결제 성공했습니다');
                 enablePageScroll();
             } else {
@@ -103,40 +107,47 @@ class OrderDetail extends React.Component {
                     <div className='contents' style={{ marginTop: '24px', backgroundColor: '#ffffff', borderRadius: '8px', padding: '8px' }}>
                         <Row type='flex' justify='center'>
                             <Col span={24} lg={12} style={{ textAlign: 'center' }}>
-                                <div style={{ width: '320px', height: '320px', margin: 'auto', borderRadius: '20px', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' }}>
-                                    <Carousel autoplay>
-                                        {order.thumbnail_images.map(image => <div key={image.id} style={{ width: '320px', height: '320px' }}><img src={image.url} style={{ borderRadius: '20px', width: '320px', height: '320px', objectFit: 'cover' }} /></div>)}
-                                    </Carousel>
+                                <div style={{ height: '100%', display: 'flex' }}>
+                                    <div style={{ width: '320px', height: '320px', margin: 'auto', borderRadius: '20px', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' }}>
+                                        <Carousel autoplay>
+                                            {order.thumbnail_images.map(image => <div key={image.id} style={{ width: '320px', height: '320px' }}><img src={image.url} style={{ borderRadius: '20px', width: '320px', height: '320px', objectFit: 'cover' }} /></div>)}
+                                        </Carousel>
+                                    </div>
                                 </div>
                             </Col>
 
                             <Col span={24} lg={12} style={{ padding: '10px' }}>
-                                <div>{order.title}</div>
-                                <div>{order.description}</div>
-                                <div>판매자 : {order.user.username} ({order.user.email})</div>
-                                <div>
-                                    <DropboxOutlined style={{ color: '#17A589' }} />
-                                    <span style={{ marginLeft: '4px', fontSize: '0.8em', color: '#17A589' }}>{order.stock} {i18n.t('stock')}</span>
+                                <Divider style={{ margin: '10px 0' }} />
+                                <div style={{ fontSize: '2em' }}>{order.title}</div>
+                                <div style={{ textAlign: 'right' }}> <Tag>판매자</Tag><Tag color='blue'>{order.user.username} ({order.user.email})</Tag> </div>
+                                <Divider style={{ margin: '10px 0' }} />
+                                <div style={{ marginBottom: '18px' }}>{order.description}</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}>
+                                    <Tag style={{ height: '24px' }}>물품금액</Tag>
+                                    <Tag color='geekblue' style={{ textDecoration: 'line-through', marginRight: '4px' }}>{commaFormat(order.before_amount)} ₩</Tag>
+                                    <Tag color='red' style={{ marginRight: '4px' }}>{commaFormat(order.amount)} ₩</Tag>
                                 </div>
-                                <div>{commaFormat(order.before_amount)} ₩ -> {commaFormat(order.amount)} ₩</div>
-                                <div>구매수량 : <InputNumber value={quantity} min={1} max={order.stock} onChange={this.changeQuantity.bind(this)} disabled={order.stock <= 0} /></div>
-                                <div>결제구분 : <Radio disabled={true} defaultChecked>Kakao Pay</Radio></div>
-                                <div>예샹 결제금액 : {commaFormat(order.amount * quantity)} ₩</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>재고수량</Tag>{commaFormat(order.stock)}개</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>구매수량</Tag><InputNumber size='small' value={quantity} min={1} max={order.stock} onChange={this.changeQuantity.bind(this)} disabled={order.stock <= 0} /></div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>결제수단</Tag><Radio disabled={true} defaultChecked>Kakao Pay</Radio></div>
+                                <div style={{ display: 'flex', marginTop: '4px', marginBottom: '4px' }}><Tag style={{ height: '24px' }}>결제금액</Tag>{commaFormat(order.amount * quantity)} ₩</div>
 
-                                <Button onClick={() => { this.toggle('carry') }} style={{ width: '120px' }}>
-                                    {!this.isCarried && <ShoppingOutlined />}
-                                    {this.isCarried && <ShoppingFilled style={{ color: '#03A9F4' }} />}
-                                    <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isCarried ? '#03A9F4' : '' }}>{order.carried_users.length} {i18n.t('carry')}</span>
-                                </Button>
-                                <Button onClick={() => { this.toggle('like') }} style={{ width: '120px' }}>
-                                    {!this.isLiked && <HeartOutlined />}
-                                    {this.isLiked && <HeartFilled style={{ color: '#EC407A' }} />}
-                                    <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isLiked ? '#EC407A' : '' }}>{order.liked_users.length} {i18n.t('like')}</span>
-                                </Button>
-                                <Button type='primary' onClick={this.pay.bind(this)} style={{ width: '120px' }} disabled={!auth.hasPermission}>
-                                    <GiftOutlined />
-                                    바로 구매
-                                </Button>
+                                <div style={{ textAlign: 'right' }}>
+                                    <Button onClick={() => { this.toggle('carry') }} style={{ width: '100px', marginRight: '10px' }}>
+                                        {!this.isCarried && <ShoppingOutlined />}
+                                        {this.isCarried && <ShoppingFilled style={{ color: '#03A9F4' }} />}
+                                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isCarried ? '#03A9F4' : '' }}>{order.carried_users.length} {i18n.t('carry')}</span>
+                                    </Button>
+                                    <Button onClick={() => { this.toggle('like') }} style={{ width: '100px', marginRight: '10px' }}>
+                                        {!this.isLiked && <HeartOutlined />}
+                                        {this.isLiked && <HeartFilled style={{ color: '#EC407A' }} />}
+                                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isLiked ? '#EC407A' : '' }}>{order.liked_users.length} {i18n.t('like')}</span>
+                                    </Button>
+                                    <Button type='primary' onClick={this.pay.bind(this)} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
+                                        <GiftOutlined />
+                                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isLiked ? '#EC407A' : '' }}>구매</span>
+                                    </Button>
+                                </div>
                             </Col>
                         </Row>
                         <Divider>{i18n.t('detail')} {i18n.t('info')}</Divider>
