@@ -51,21 +51,21 @@ class OrderCard extends React.Component {
                 style={CardStyle}
                 cover={
                     <div style={{ height: '300px' }}>
-                        <Carousel autoplay style={{
-                            textAlign: 'center',
-                            height: '300px',
-                            overflow: 'hidden',
-                        }}>
-                            {
-                                order.thumbnail_images.map((image) => {
-                                    return (
-                                        <LazyLoad height={300} key={image.id}>
+                        <LazyLoad height={300} key={image.id}>
+                            <Carousel autoplay style={{
+                                textAlign: 'center',
+                                height: '300px',
+                                overflow: 'hidden',
+                            }}>
+                                {
+                                    order.thumbnail_images.map((image) => {
+                                        return (
                                             <img src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
-                                        </LazyLoad>
-                                    )
-                                })
-                            }
-                        </Carousel>
+                                        )
+                                    })
+                                }
+                            </Carousel>
+                        </LazyLoad>
                     </ div>
                 }
                 actions={[

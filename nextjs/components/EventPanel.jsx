@@ -18,6 +18,7 @@ class EventPanel extends React.Component {
                         events.map((event, index) => {
                             return (
                                 <div key={index} style={{ position: 'relative' }}>
+                                    <img src={event.thumbnail} style={{ position: 'absolute', width: '100%', height: '300px', objectFit: 'cover', opacity: 0.5, zIndex: -1 }} />
                                     <div style={{ height: '300px', zIndex: 2, padding: '30px' }}>
                                         <div style={{ fontSize: '3.5em', color: 'white', textShadow: '2px 2px 2px gray' }}>{event.title}</div>
                                         <div style={{ fontSize: '1.5em', color: 'white', textShadow: '2px 2px 2px gray' }}>{event.description}</div>
@@ -25,7 +26,6 @@ class EventPanel extends React.Component {
                                             <Tag icon={<CalendarOutlined />} color='geekblue'>{event.begin} ~ {event.end}</Tag>
                                         </div>
                                     </div>
-                                    <img src={event.thumbnail} style={{ position: 'absolute', width: '100%', height: '300px', objectFit: 'cover', opacity: 0.5, zIndex: -1 }} />
                                 </div>
                             );
                         })
