@@ -12,12 +12,14 @@ class EventPanel extends React.Component {
         return (
             <div className="site-layout-content" style={{ overflow: 'hidden', marginTop: '10px', height: '300px', borderRadius: '20px', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' }}>
                 <Carousel autoplay dotPosition='left' style={{
-                    height: '300px'
+                    height: '300px',
+                    overflow: 'hidden',
+                    borderRadius: '20px'
                 }}>
                     {
                         events.map((event, index) => {
                             return (
-                                <div key={index} style={{ position: 'relative' }}>
+                                <div key={index} style={{ position: 'relative', overflow: 'hidden', borderRadius: '20px' }}>
                                     <img src={event.thumbnail} style={{ position: 'absolute', width: '100%', height: '300px', objectFit: 'cover', opacity: 0.5, zIndex: -1 }} />
                                     <div style={{ height: '300px', zIndex: 2, padding: '30px' }}>
                                         <div style={{ fontSize: '3.5em', color: 'white', textShadow: '2px 2px 2px gray' }}>{event.title}</div>
