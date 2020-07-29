@@ -145,7 +145,7 @@ class OrderDetail extends React.Component {
                                     </Button>
                                     <Button type='primary' onClick={this.pay.bind(this)} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
                                         <GiftOutlined />
-                                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isLiked ? '#EC407A' : '' }}>구매</span>
+                                        <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>구매</span>
                                     </Button>
                                 </div>
                             </Col>
