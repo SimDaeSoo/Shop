@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 import Router from 'next/router';
 import { Carousel, Card, Tag } from 'antd';
 import { ShoppingOutlined, ShoppingFilled, HeartOutlined, HeartFilled, DropboxOutlined } from '@ant-design/icons';
-import LazyLoad from 'react-lazyload';
 import { commaFormat } from '../utils';
 
 const CardStyle = { borderRadius: '4px', width: 300, margin: '10px', display: 'inline-block', verticalAlign: 'top', textAlign: 'left', border: 'none', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' };
@@ -51,21 +50,19 @@ class OrderCard extends React.Component {
                 style={CardStyle}
                 cover={
                     <div style={{ height: '300px' }}>
-                        <LazyLoad height={300}>
-                            <Carousel autoplay style={{
-                                textAlign: 'center',
-                                height: '300px',
-                                overflow: 'hidden',
-                            }}>
-                                {
-                                    order.thumbnail_images.map((image) => {
-                                        return (
-                                            <img key={image.id} src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
-                                        )
-                                    })
-                                }
-                            </Carousel>
-                        </LazyLoad>
+                        <Carousel autoplay style={{
+                            textAlign: 'center',
+                            height: '300px',
+                            overflow: 'hidden',
+                        }}>
+                            {
+                                order.thumbnail_images.map((image) => {
+                                    return (
+                                        <img key={image.id} src={image.url} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
+                                    )
+                                })
+                            }
+                        </Carousel>
                     </ div>
                 }
                 actions={[
