@@ -1,0 +1,800 @@
+[
+  {
+    "mapping": "d_5",
+    "username": "선진테크",
+    "name": "TESA 다독이",
+    "ea": "2만",
+    "deadline": "한달",
+    "description": "가로 7cm, 세로 12cm",
+    "address": "인천 광역시 서구 가좌동 574-4번지",
+    "phone": "010-4945-3287",
+    "location": [
+      37.485949,
+      126.670720
+    ]
+  },
+  {
+    "mapping": "d_6",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(Ig-MG)",
+    "ea": "50만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_7",
+    "username": "서나 실업",
+    "name": "마스크덮개",
+    "ea": "10만",
+    "deadline": "한달",
+    "description": "가로 : 4cm 세로 : 4cm",
+    "address": "인천광역시 남동구 예술로 226번길 17",
+    "phone": "010 5546 1179",
+    "location": [
+      37.454238,
+      126.702960
+    ]
+  },
+  {
+    "mapping": "d_8",
+    "username": "(주)파인테크",
+    "name": "TAP 16 줄자덮개",
+    "ea": "20만",
+    "deadline": "한달",
+    "description": "8cm 세로 : 8cm",
+    "address": "경기도 부천시 부일로 448 프리존빌딩",
+    "phone": "032 613 7755",
+    "location": [
+      37.485962,
+      126.780599
+    ]
+  },
+  {
+    "mapping": "d_9",
+    "username": "(주)금형테크",
+    "name": "영탁 막걸리잔",
+    "ea": "20만",
+    "deadline": "한달",
+    "description": "가로 : 6cm 세로 : 4cm",
+    "address": "인천 남동공단",
+    "phone": "010 9042 6560",
+    "location": [
+      37.406226,
+      126.692314
+    ]
+  },
+  {
+    "mapping": "d_10",
+    "username": "대림테크",
+    "name": "hi-pass 덮개",
+    "ea": "15만",
+    "deadline": "3주",
+    "description": "가로 4cm 세로 6cm",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_11",
+    "username": "삼우정밀",
+    "name": "Water Bottle 1100ml 용기",
+    "ea": "10만",
+    "deadline": "한달",
+    "description": "용량 : 1,100ml",
+    "address": "인천광역시 동구 방축로 83번길",
+    "phone": "010 2746 2263",
+    "location": [
+      37.485873,
+      126.655130
+    ]
+  },
+  {
+    "mapping": "d_12",
+    "username": "삼우정밀",
+    "name": "그린화이바 용기",
+    "ea": "10만",
+    "deadline": "한달",
+    "description": "가로 : 10cm 세로 : 25cm",
+    "address": "인천광역시 동구 방축로 83번길",
+    "phone": "010 2746 2263",
+    "location": [
+      37.485873,
+      126.655130
+    ]
+  },
+  {
+    "mapping": "d_13",
+    "username": "삼우정밀",
+    "name": "Dream Big",
+    "ea": "10만",
+    "deadline": "한달",
+    "description": "용량 : 1,000ml",
+    "address": "인천광역시 동구 방축로 83번길",
+    "phone": "010 2746 2263",
+    "location": [
+      37.485873,
+      126.655130
+    ]
+  },
+  {
+    "mapping": "d_14",
+    "username": "삼우정밀",
+    "name": "Herbalife 용기",
+    "ea": "10만",
+    "deadline": "한달",
+    "description": "용량 : 300ml",
+    "address": "인천광역시 동구 방축로 83번길",
+    "phone": "010 2746 2263",
+    "location": [
+      37.485873,
+      126.655130
+    ]
+  },
+  {
+    "mapping": "d_15",
+    "username": "아크릴명판 CNC",
+    "name": "Pro 바리깡",
+    "ea": "5만",
+    "deadline": "3주",
+    "description": "가로 : 3cm 세로 : 12cm",
+    "address": "경기도 부천시 원미구 조마루로 385번길 21",
+    "phone": "010 3344 6585",
+    "location": [
+      37.498783,
+      126.786556
+    ]
+  },
+  {
+    "mapping": "d_16",
+    "username": "애드탑",
+    "name": "SUPER SONIC S1",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "가로 : 30cm 세로 : 16cm ",
+    "address": "서울 금천구 가산디지털로 1로 5 대륭테크노타운",
+    "phone": "02-838-4004",
+    "location": [
+      37.477867,
+      126.879232
+    ]
+  },
+  {
+    "mapping": "d_17",
+    "username": "태화테크",
+    "name": "CHI 실크 인퓨전 용기",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "용량 355ml, 177ml",
+    "address": "인천광역시 서구 건지로 109번 길, 47 305(정우아파트형 공장)",
+    "phone": "010-9666-7970",
+    "location": [
+      37.503276,
+      126.653445
+    ]
+  },
+  {
+    "mapping": "d_18",
+    "username": "주식회사 경신",
+    "name": "CN7-CAR",
+    "ea": "20만",
+    "deadline": "3주",
+    "description": "가로 세로 : 차량 배터리",
+    "address": "인천 연수구 송도동 7-1",
+    "phone": "032-714-7100~2",
+    "location": [
+      37.388281,
+      126.649411
+    ]
+  },
+  {
+    "mapping": "d_19",
+    "username": "주식회사 경신",
+    "name": "JX1-CAR",
+    "ea": "20만",
+    "deadline": "3주",
+    "description": "가로 세로 : 차량 배터리",
+    "address": "인천 연수구 송도동 7-1",
+    "phone": "032-714-7100~2",
+    "location": [
+      37.388281,
+      126.649411
+    ]
+  },
+  {
+    "mapping": "d_20",
+    "username": "주식회사 경신",
+    "name": "쉐보레 배터리",
+    "ea": "30만",
+    "deadline": "3주",
+    "description": "가로 세로 : 차량 배터리",
+    "address": "인천 연수구 송도동 7-1",
+    "phone": "032-714-7100~2",
+    "location": [
+      37.388281,
+      126.649411
+    ]
+  },
+  {
+    "mapping": "d_21",
+    "username": "주식회사 경신",
+    "name": "DL3c-CAR",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "가로 세로 : 차량 배터리",
+    "address": "인천 연수구 송도동 7-1",
+    "phone": "032-714-7100~2",
+    "location": [
+      37.388281,
+      126.649411
+    ]
+  },
+  {
+    "mapping": "d_22",
+    "username": "주식회사 경신",
+    "name": "쉐보레 소형 배터리",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "가로 세로 : 차량 배터리",
+    "address": "인천 연수구 송도동 7-1",
+    "phone": "032-714-7100~2",
+    "location": [
+      37.388281,
+      126.649411
+    ]
+  },
+  {
+    "mapping": "d_23",
+    "username": "엠피온",
+    "name": "hi-pass 행복단말기",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "가로 : 7cm 세로 : 7cm",
+    "address": "경기도 성남시 분당구 불정로 6 네이버 그린팩토리 13561",
+    "phone": "1588-3819",
+    "location": [
+      37.358940,
+      127.104725
+    ]
+  },
+  {
+    "mapping": "d_24",
+    "username": "대림테크",
+    "name": "White 수정테이프(Alpha)",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_25",
+    "username": "대림테크",
+    "name": "잉글랜드 수정테이프",
+    "ea": "20만",
+    "deadline": "한달",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_26",
+    "username": "대림테크",
+    "name": "balune 수정테이프",
+    "ea": "20만",
+    "deadline": "한달",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_28",
+    "username": "대림테크",
+    "name": "MILAN 수정테이프",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_29",
+    "username": "대림테크",
+    "name": "종이나라 수정테이프(스탬프형)",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_30",
+    "username": "주식회사 경신",
+    "name": "쉐보레 배터리(대형)",
+    "ea": "5만",
+    "deadline": "3주",
+    "description": "가로 세로 : 차량 배터리",
+    "address": "인천 연수구 송도동 7-1",
+    "phone": "032-714-7100~2",
+    "location": [
+      37.388281,
+      126.649411
+    ]
+  },
+  {
+    "mapping": "d_31",
+    "username": "대림테크",
+    "name": "EliteMate수정테이프",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_32",
+    "username": "대림테크",
+    "name": "balune 수정테이프(소형)",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_33",
+    "username": "대림테크",
+    "name": "Clip 집게",
+    "ea": "10만",
+    "deadline": "2주",
+    "description": "가로 : 3cm 세로 : 20cm",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_34",
+    "username": "대림테크",
+    "name": "종이나라 수정테이프(SIMPUL)",
+    "ea": "10만",
+    "deadline": "2주",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_35",
+    "username": "대림테크",
+    "name": "balune 수정테이프(소형)",
+    "ea": "10만",
+    "deadline": "2주",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_36",
+    "username": "대림테크",
+    "name": "Alpha 수정테이프(소형)",
+    "ea": "10만",
+    "deadline": "2주",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_37",
+    "username": "대림테크",
+    "name": "SKILCRAFT 수정테이프",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_38",
+    "username": "대림테크",
+    "name": "NSN 수정테이프",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "가로 세로 : 수정테이프크기",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_39",
+    "username": "삼우정밀",
+    "name": "뉴히트크리너 용기",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "세로 : 6cm",
+    "address": "인천광역시 동구 방축로 83번길",
+    "phone": "010 2746 2263",
+    "location": [
+      37.485873,
+      126.655130
+    ]
+  },
+  {
+    "mapping": "d_40",
+    "username": "신광테크",
+    "name": "코로나 테스트기(콤보)",
+    "ea": "100만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "인천 계양구 봉오대로517번길 43-1",
+    "phone": "010 4758 1456",
+    "location": [
+      37.530890,
+      126.706036
+    ]
+  },
+  {
+    "mapping": "d_41",
+    "username": "신광테크",
+    "name": "코로나 테스트기(Delvotest)",
+    "ea": "50만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "인천 계양구 봉오대로517번길 43-1",
+    "phone": "010 4758 1456",
+    "location": [
+      37.530890,
+      126.706036
+    ]
+  },
+  {
+    "mapping": "d_42",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(BVDV, BPT)",
+    "ea": "100만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_43",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(Rabies Ab)",
+    "ea": "100만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_44",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(PED)",
+    "ea": "50만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_45",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(AIV)",
+    "ea": "50만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_46",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(Beta-Lactam)",
+    "ea": "50만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_47",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(Quinolone)",
+    "ea": "80만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_48",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(CDV CIV)",
+    "ea": "50만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_49",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(CDV CIV)",
+    "ea": "20만",
+    "deadline": "2주",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_50",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(CDV)",
+    "ea": "20만",
+    "deadline": "2주",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_51",
+    "username": "수젠텍",
+    "name": "코로나 테스트기(Feline)",
+    "ea": "40만",
+    "deadline": "3주",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "충청북도 청주시 흥덕구 오송읍 정중연제로 721-26",
+    "phone": "043 710 2822",
+    "location": [
+      36.616210,
+      127.306100
+    ]
+  },
+  {
+    "mapping": "d_52",
+    "username": "신광테크",
+    "name": "코로나 테스트기(Macrolides)",
+    "ea": "100만",
+    "deadline": "한달",
+    "description": "가로 : 2.5cm 세로 : 7cm",
+    "address": "인천 계양구 봉오대로517번길 43-1",
+    "phone": "010 4758 1456",
+    "location": [
+      37.530890,
+      126.706036
+    ]
+  },
+  {
+    "mapping": "d_53",
+    "username": "대림테크",
+    "name": "C300",
+    "ea": "10만",
+    "deadline": "3주",
+    "description": "가로 : 5cm 세로 : 12cm",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_54",
+    "username": "대림테크",
+    "name": "REC 손잡이부분",
+    "ea": "20만",
+    "deadline": "3주",
+    "description": "가로 : 5cm 세로 : 12cm",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_55",
+    "username": "아크릴명판 CNC",
+    "name": "SW-EB01",
+    "ea": "40만",
+    "deadline": "한달",
+    "description": "가로 : 3cm 세로 : 12cm",
+    "address": "경기도 부천시 원미구 조마루로 385번길 21",
+    "phone": "010 3344 6585",
+    "location": [
+      37.498783,
+      126.786556
+    ]
+  },
+  {
+    "mapping": "d_56",
+    "username": "아크릴명판 CNC",
+    "name": "USB 포트",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 : 2cm 세로 : 10cm",
+    "address": "경기도 부천시 원미구 조마루로 385번길 21",
+    "phone": "010 3344 6585",
+    "location": [
+      37.498783,
+      126.786556
+    ]
+  },
+  {
+    "mapping": "d_57",
+    "username": "아크릴명판 CNC",
+    "name": "TIMER",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 : 3cm 세로 : 8cm",
+    "address": "경기도 부천시 원미구 조마루로 385번길 21",
+    "phone": "010 3344 6585",
+    "location": [
+      37.498783,
+      126.786556
+    ]
+  },
+  {
+    "mapping": "d_58",
+    "username": "(주)파인테크",
+    "name": "K519 줄자덮개",
+    "ea": "20만",
+    "deadline": "한달",
+    "description": "가로 : 8cm 세로 : 8cm",
+    "address": "경기도 부천시 부일로 448 프리존빌딩",
+    "phone": "032 613 7755",
+    "location": [
+      37.485962,
+      126.780599
+    ]
+  },
+  {
+    "mapping": "d_59",
+    "username": "아크릴명판 CNC",
+    "name": "SW-NT01",
+    "ea": "30만",
+    "deadline": "한달",
+    "description": "가로 : 3cm 세로 : 11cm",
+    "address": "경기도 부천시 원미구 조마루로 385번길 21",
+    "phone": "010 3344 6585",
+    "location": [
+      37.498783,
+      126.786556
+    ]
+  },
+  {
+    "mapping": "d_60",
+    "username": "대림테크",
+    "name": "e-pass 덮개",
+    "ea": "15만",
+    "deadline": "3주",
+    "description": "사각형 : 가로 4cm 세로 6cm 원형 : 지름 : 4cm",
+    "address": "인천광역시 미추홀구 염전로 348",
+    "phone": "032-583-2021",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_61",
+    "username": "대림테크",
+    "name": "마더스콘 덮개",
+    "ea": "40만",
+    "deadline": "한달",
+    "description": "지름 : 6cm",
+    "address": "경기도 부천시 원미구 조마루로 385번길 21",
+    "phone": "010 3344 6585",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  },
+  {
+    "mapping": "d_62",
+    "username": "대림테크",
+    "name": "마더스콘 수저, 젓가락",
+    "ea": "50만",
+    "deadline": "한달",
+    "description": "크기 : 아동 수저, 젓가락",
+    "address": "경기도 부천시 원미구 조마루로 385번길 21",
+    "phone": "010 3344 6585",
+    "location": [
+      37.470008,
+      126.678518
+    ]
+  }
+]

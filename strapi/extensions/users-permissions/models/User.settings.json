@@ -57,13 +57,15 @@
       "via": "user",
       "collection": "order"
     },
-    "liked_orders": {
-      "via": "liked_users",
-      "collection": "order"
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "under",
+        "upper"
+      ]
     },
-    "carried_orders": {
-      "via": "carried_users",
-      "collection": "order"
+    "bot": {
+      "type": "boolean"
     }
   }
 }

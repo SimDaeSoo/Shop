@@ -37,29 +37,7 @@ async function _auth(context) {
         }
     }
 
-    if (user && user.id && jwt) {
-        const { liked_orders, carried_orders } = await _getUserData(jwt, user.id);
-        user.liked_orders = liked_orders;
-        user.carried_orders = carried_orders;
-    };
-
     return { jwt, user };
-}
-
-async function _getUserData(jwt, id) {
-    const query = `query {
-        liked_orders: orders(where:{liked_users:${id}}){
-            id
-        }
-        carried_orders: orders(where:{carried_users:${id}}){
-            id
-        }
-      }`;
-
-    const headers = { Authorization: `bearer ${jwt}` };
-    const { data } = await axios.post(`${process.env.SSR_API_URL}/graphql`, { query, variables: {} }, { headers });
-    const { liked_orders, carried_orders } = (data || {}).data;
-    return { liked_orders: liked_orders || [], carried_orders: carried_orders || [] };
 }
 
 async function _verifing(provider, access_token, id_token) {

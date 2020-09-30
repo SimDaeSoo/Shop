@@ -15,39 +15,36 @@
     "description": {
       "type": "string"
     },
-    "amount": {
-      "type": "integer"
-    },
-    "before_amount": {
-      "type": "integer"
-    },
     "user": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "orders"
     },
     "detail_images": {
-      "via": "detail_order",
-      "collection": "photo"
-    },
-    "stock": {
-      "type": "integer"
-    },
-    "liked_users": {
-      "plugin": "users-permissions",
-      "collection": "user",
-      "via": "liked_orders",
-      "dominant": true
-    },
-    "carried_users": {
-      "plugin": "users-permissions",
-      "collection": "user",
-      "via": "carried_orders",
-      "dominant": true
+      "collection": "photo",
+      "via": "detail_order"
     },
     "thumbnail_images": {
-      "via": "thumbnail_order",
-      "collection": "photo"
+      "collection": "photo",
+      "via": "thumbnail_order"
+    },
+    "mapping": {
+      "type": "string"
+    },
+    "deadline": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "ea": {
+      "type": "string"
+    },
+    "location": {
+      "type": "json"
     }
   }
 }

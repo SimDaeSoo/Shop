@@ -58,7 +58,21 @@ services:
       - ./nextjs/:/home/service/nextjs/
       - nextjs_node_modules:/home/service/nextjs/node_modules/
 
+  socket:
+    build:
+      context: .
+      dockerfile: ./compose/socket/Dockerfile-dev
+    command: sh /start-dev.sh
+    environment:
+      - SSR_API_URL=http://strapi:1337
+    ports:
+      - 8080:8080
+    volumes:
+      - ./socket/:/home/service/socket/
+      - socket_node_modules:/home/service/socket/node_modules/
+
 volumes:
   mysqldata:
   strapi_node_modules:
   nextjs_node_modules:
+  socket_node_modules:

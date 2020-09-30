@@ -33,6 +33,7 @@ class Head extends React.Component {
         <meta property="og:image:height" content="630" />
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
         <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a519d15dc1a619080e60a68e7402b6a9"></script>
       </NextHead>
     )
   }

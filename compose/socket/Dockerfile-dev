@@ -1,0 +1,6 @@
+FROM node:lts
+
+WORKDIR /home/service/socket
+
+ADD compose/socket/start-dev.sh /start-dev.sh
+RUN chmod +x /*.sh

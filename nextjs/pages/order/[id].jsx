@@ -1,9 +1,9 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
-import { initialize, commaFormat } from '../../utils';
-import { Button, Layout, Divider, message, Row, Col, Carousel, Radio, InputNumber, Tag } from 'antd';
-import { ShoppingOutlined, ShoppingFilled, HeartOutlined, HeartFilled, GiftOutlined } from '@ant-design/icons';
+import { initialize } from '../../utils';
+import { Button, Layout, Divider, message, Row, Col, Carousel, Tag } from 'antd';
+import { GiftOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import MainHeader from '../../components/MainHeader';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
@@ -18,7 +18,7 @@ class OrderDetail extends React.Component {
             this.initialize();
         }
         const { order } = this.props;
-        this.state = { order, quantity: 1 };
+        this.state = { order };
     }
 
     initialize() {
@@ -26,17 +26,21 @@ class OrderDetail extends React.Component {
         IMP.init("imp99962599");
     }
 
+    chat() {
+        message.error('아직 완료되지 않은 기능입니다.');
+    }
+
     pay() {
         const { auth } = this.props;
-        const { order, quantity } = this.state;
+        const { order } = this.state;
         disablePageScroll();
         window.scrollTo(0, 0);
         IMP.request_pay({
             pg: "kakao",
             pay_method: "card",
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: `${order.title} ${commaFormat(quantity)}개`,
-            amount: order.amount * quantity,
+            name: `${order.title}개`,
+            amount: order.amount,
             buyer_email: auth.user.email,
             buyer_name: auth.user.username,
             // buyer_tel: "010-3192-8053",
@@ -44,11 +48,6 @@ class OrderDetail extends React.Component {
             // buyer_postcode: "01181"
         }, async (rsp) => {
             if (rsp.success) {
-                const headers = { Authorization: `bearer ${auth.jwt}` };
-                const buyResponse = await axios.post(`/api/orders/${order.id}/buy`, { quantity }, { headers });
-                const responseOrder = buyResponse.data;
-                this.setState({ order: responseOrder });
-
                 message.success('결제 성공했습니다');
                 enablePageScroll();
             } else {
@@ -56,6 +55,21 @@ class OrderDetail extends React.Component {
                 enablePageScroll();
             }
         });
+    }
+
+    componentDidMount() {
+        const { order } = this.state;
+        console.log();
+        const container = document.getElementById('map');
+        const location = new kakao.maps.LatLng(order.location[0], order.location[1]);
+        const options = { center: location, level: 4 };
+        const marker = new kakao.maps.Marker({ position: location });
+        const map = new kakao.maps.Map(container, options);
+        const mapTypeControl = new kakao.maps.MapTypeControl();
+        const zoomControl = new kakao.maps.ZoomControl();
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+        marker.setMap(map);
     }
 
     async toggle(type) {
@@ -79,34 +93,16 @@ class OrderDetail extends React.Component {
         this.setState({ order: response.data });
     }
 
-    get isLiked() {
-        const { auth } = this.props;
-        const { order } = this.state;
-        const ids = order.liked_users.map(user => Number(user.id));
-        return ids.indexOf(auth.user.id || -1) >= 0;
-    }
-
-    get isCarried() {
-        const { auth } = this.props;
-        const { order } = this.state;
-        const ids = order.carried_users.map(user => Number(user.id));
-        return ids.indexOf(auth.user.id || -1) >= 0;
-    }
-
-    changeQuantity(quantity) {
-        this.setState({ quantity });
-    }
-
     render() {
         const { auth } = this.props;
-        const { order, quantity } = this.state;
+        const { order } = this.state;
 
         return (
             <Layout className="layout" style={{ maxWidth: '1280px', width: '100%', margin: 'auto' }}>
                 <MainHeader showSearch={false} />
                 <Layout.Content>
                     <div className='contents' style={{ marginTop: '24px', backgroundColor: '#ffffff', borderRadius: '8px', padding: '8px' }}>
-                        <Row type='flex' justify='center'>
+                        <Row type='flex' justify='center' style={{ minHeight: '360px' }}>
                             <Col span={24} lg={12} style={{ textAlign: 'center' }}>
                                 <div style={{ height: '100%', display: 'flex' }}>
                                     <div style={{ width: '320px', height: '320px', margin: 'auto', borderRadius: '20px', boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)' }}>
@@ -120,33 +116,18 @@ class OrderDetail extends React.Component {
                             <Col span={24} lg={12} style={{ padding: '10px' }}>
                                 <Divider style={{ margin: '10px 0' }} />
                                 <div style={{ fontSize: '2em' }}>{order.title}</div>
-                                <div style={{ textAlign: 'right' }}> <Tag>판매자</Tag><Tag color='blue'>{order.user.username} ({order.user.email})</Tag> </div>
+                                <div style={{ textAlign: 'right' }}> <Tag>발주업체</Tag><Tag color='blue'>{order.user.username} ({order.user.email})</Tag> </div>
                                 <Divider style={{ margin: '10px 0' }} />
-                                <div style={{ marginBottom: '18px' }}>{order.description}</div>
-                                <div style={{ display: 'flex', marginTop: '4px' }}>
-                                    <Tag style={{ height: '24px' }}>물품금액</Tag>
-                                    <Tag color='geekblue' style={{ textDecoration: 'line-through', marginRight: '4px' }}>{commaFormat(order.before_amount)} ₩</Tag>
-                                    <Tag color='red' style={{ marginRight: '4px' }}>{commaFormat(order.amount)} ₩</Tag>
-                                </div>
-                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>재고수량</Tag>{commaFormat(order.stock)}개</div>
-                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>구매수량</Tag><InputNumber size='small' value={quantity} min={1} max={order.stock} onChange={this.changeQuantity.bind(this)} disabled={order.stock <= 0} /></div>
-                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>결제수단</Tag><Radio disabled={true} defaultChecked>Kakao Pay</Radio></div>
-                                <div style={{ display: 'flex', marginTop: '4px', marginBottom: '4px' }}><Tag style={{ height: '24px' }}>결제금액</Tag>{commaFormat(order.amount * quantity)} ₩</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>발주 수량</Tag>{order.ea}개</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>설명</Tag>{order.description}</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>기한</Tag>{order.deadline}</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>주소</Tag>{order.address}</div>
+                                <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>번호</Tag>{order.phone}</div>
 
                                 <div style={{ textAlign: 'right' }}>
-                                    <Button onClick={() => { this.toggle('carry') }} style={{ width: '100px', marginRight: '10px' }}>
-                                        {!this.isCarried && <ShoppingOutlined />}
-                                        {this.isCarried && <ShoppingFilled style={{ color: '#03A9F4' }} />}
-                                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isCarried ? '#03A9F4' : '' }}>{order.carried_users.length} {i18n.t('carry')}</span>
-                                    </Button>
-                                    <Button onClick={() => { this.toggle('like') }} style={{ width: '100px', marginRight: '10px' }}>
-                                        {!this.isLiked && <HeartOutlined />}
-                                        {this.isLiked && <HeartFilled style={{ color: '#EC407A' }} />}
-                                        <span style={{ marginLeft: '4px', fontSize: '0.8em', color: this.isLiked ? '#EC407A' : '' }}>{order.liked_users.length} {i18n.t('like')}</span>
-                                    </Button>
-                                    <Button type='primary' onClick={this.pay.bind(this)} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
+                                    <Button type='primary' onClick={this.chat} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
                                         <GiftOutlined />
-                                        <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>구매</span>
+                                        <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>지원하기</span>
                                     </Button>
                                 </div>
                             </Col>
@@ -159,6 +140,12 @@ class OrderDetail extends React.Component {
                                 })
                             }
                         </div>
+
+                        <Divider style={{ margin: '10px 0' }} >위치정보</Divider>
+                        <div style={{ width: '100%', margin: 'auto', maxWidth: '1024px', paddingLeft: '28px', marginBottom: '10px' }}>
+                            <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>주소</Tag>{order.address}</div>
+                        </div>
+                        <div id='map' style={{ width: '100%', margin: 'auto', height: '500px', maxWidth: '968px', padding: '28px' }} />
                     </div>
                 </Layout.Content>
                 <Layout.Footer style={{ textAlign: 'center', padding: '10 0px' }}>EveryWear ©2020 Created by SCH</Layout.Footer>
@@ -175,6 +162,15 @@ async function getOrder(id) {
 export async function getServerSideProps(context) {
     const initializeData = await initialize(context);
     const order = await getOrder(context.query.id);
+
+    if (initializeData) {
+        const { user } = initializeData.auth || undefined;
+        if (user && user.id && !user.type) {
+            context.res.writeHead(303, { Location: '/type' });
+            context.res.end();
+        }
+    }
+
     return { props: { initializeData, order } };
 }
 

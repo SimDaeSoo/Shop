@@ -5,6 +5,8 @@ import i18n from '../locales/i18n';
 
 class Environment {
     @observable query = {};
+    @observable mainDrawer = false;
+    @observable subDrawer = false;
 
     constructor(initializeData) {
         this.query = initializeData.query;
@@ -20,6 +22,16 @@ class Environment {
             i18n.changeLanguage(this.language);
             Router.push(`${Router.asPath.split('?')[0]}${this.queryString}`);
         }
+    }
+
+    @action toggleMainDrawer() {
+        console.log('hello');
+        this.mainDrawer = !this.mainDrawer;
+        console.log(this.mainDrawer);
+    }
+
+    @action toggleSubDrawer() {
+        this.subDrawer = !this.subDrawer;
     }
 
     get language() {

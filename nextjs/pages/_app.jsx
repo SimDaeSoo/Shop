@@ -13,6 +13,7 @@ import i18n from '../locales/i18n';
 import 'nprogress/nprogress.css';
 import '../public/styles/init.css';
 import 'antd/dist/antd.css';
+import { Drawer } from 'antd';
 
 /* Components */
 import Head from '../components/Head';
@@ -28,14 +29,21 @@ class _App extends App {
         this.store = initializeStore(initializeData);
     }
 
+    componentDidMount() {
+        const { initializeData } = this.props.pageProps;
+        const { user } = initializeData.auth || {};
+        console.log(this.store, user);
+    }
+
     render() {
         const { Component, pageProps } = this.props;
+
         return (
             <>
                 <TopProgressBar />
                 <I18nextProvider i18n={i18n}>
                     <Provider {...this.store}>
-                        <Head title='Every Wear' />
+                        <Head title='Every Factory' />
                         <Component {...pageProps} />
                     </Provider>
                 </I18nextProvider>

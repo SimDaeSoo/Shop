@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 import { initialize } from '../utils';
 import OrderCard from '../components/OrderCard';
 import MainHeader from '../components/MainHeader';
-import EventPanel from '../components/EventPanel';
 import { Layout, message } from 'antd';
 import axios from 'axios';
 
@@ -14,8 +13,8 @@ import axios from 'axios';
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        const { orders, events } = this.props;
-        this.state = { orders, events };
+        const { orders } = this.props;
+        this.state = { orders };
     }
 
     async toggle(type, orderId) {
@@ -45,12 +44,11 @@ class Home extends React.Component {
     }
 
     render() {
-        const { orders, events } = this.state;
+        const { orders } = this.state;
         return (
             <Layout className="layout" style={{ maxWidth: '1280px', width: '100%', margin: 'auto' }}>
                 <MainHeader showSearch={true} />
                 <Layout.Content>
-                    <EventPanel events={events} />
                     <div style={{ display: 'inline-block', textAlign: 'center', width: '100%' }}>
                         {
                             orders && orders.map((order) => {
@@ -72,46 +70,46 @@ async function getData() {
                 id
                 title
                 description
-                amount
-                before_amount
+                deadline
+                address
+                phone
+                ea
                 user {
                     id
                     username
+                    email
                 }
-                stock
                 thumbnail_images {
                     id
                     name
                     url
                 }
-                liked_users {
-                    id
-                }
-                carried_users {
-                    id
-                }
-            }
-            events {
-                id
-                title
-                description
-                thumbnail
-                begin
-                end
             }
         }
     `;
 
     const response = await axios.post(`${process.env.SSR_API_URL}/graphql`, { query });
     const { data } = response.data || {};
-    const { orders, events } = data;
-    return { orders: orders || [], events: events || [] };
+    const { orders } = data;
+    return { orders: orders || [] };
 }
 
 export async function getServerSideProps(context) {
-    const initializeData = await initialize(context);
-    const { orders, events } = await getData();
-    return { props: { initializeData, orders, events } };
+    const props = {};
+    props.initializeData = await initialize(context);
+
+    const { orders } = await getData();
+    props.orders = orders;
+
+    if (props.initializeData) {
+        const { user } = props.initializeData.auth || undefined;
+        if (user && user.id && !user.type) {
+            context.res.writeHead(303, { Location: '/type' });
+            context.res.end();
+        }
+    }
+
+    return { props };
 }
 
 export default withTranslation('Home')(Home);

@@ -2,8 +2,8 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import Router from 'next/router';
-import { Input, Button, Tag, Avatar, Badge, Select, message } from 'antd';
-import { GoogleOutlined, LogoutOutlined, UserOutlined, ShoppingCartOutlined, HeartOutlined } from '@ant-design/icons';
+import { Input, Button, Tag, Avatar, Badge, message, Drawer } from 'antd';
+import { GoogleOutlined, LogoutOutlined, UserOutlined, MessageOutlined } from '@ant-design/icons';
 
 @inject('environment', 'auth')
 @observer
@@ -38,14 +38,14 @@ class MainHeader extends React.Component {
                 <img src='/assets/logo.jpg' style={{ opacity: 0.6, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
 
                 <div style={{ position: 'absolute', color: 'white', top: '48px', width: '100%', zIndex: 2, fontSize: '4em', textAlign: 'center', textShadow: '2px 2px 2px gray' }} onClick={this.goHome.bind(this)}>
-                    <div>{i18n.t('everywear')}</div>
-                    <div style={{ fontSize: '0.35em' }}>{i18n.t('site_description')}</div>
+                    <div>{'에브리팩토리'}</div>
+                    <div style={{ fontSize: '0.35em' }}>필요한 발주를 등록하고 원하는 발주를 찾아보세요!</div>
                 </div>
 
                 {
                     showSearch &&
                     <div style={{ position: 'absolute', width: '100%', textAlign: 'center', bottom: '12px', zIndex: 2 }}>
-                        <Input.Search style={{ width: '80%', maxWidth: '800px' }} placeholder={i18n.t('search_description')} onSearch={value => console.log(value)} enterButton />
+                        <Input.Search style={{ width: '80%', maxWidth: '800px' }} placeholder={'찾고자 하는 발주를 입력해 주세요.'} onSearch={value => console.log(value)} enterButton />
                     </div>
                 }
 
@@ -57,6 +57,7 @@ class MainHeader extends React.Component {
                                 <Badge dot status="success">
                                     <Avatar icon={<UserOutlined />} />
                                 </Badge>
+                                <Tag color='magenta' style={{ marginLeft: '4px', marginRight: 0 }}>{auth.user.type === 'upper' ? '발주업체' : '하청업체'}</Tag>
                                 <Tag color='blue' style={{ marginLeft: '4px', marginRight: '8px' }}>{auth.user.email}</Tag>
                             </>
                         }
@@ -68,32 +69,34 @@ class MainHeader extends React.Component {
                         }
                         {
                             auth.hasPermission &&
-                            <>
-                                <div style={{ display: 'inline-block', marginRight: '4px' }}>
-                                    <Badge count={auth.carried.length} style={{ zIndex: 2 }} >
-                                        <Button icon={<ShoppingCartOutlined />} type='primary'>
-                                        </Button>
-                                    </Badge>
-                                </div>
-                                <div style={{ display: 'inline-block', marginRight: '4px' }}>
-                                    <Badge count={auth.liked.length} style={{ zIndex: 2 }} >
-                                        <Button icon={<HeartOutlined />} type='primary'>
-                                        </Button>
-                                    </Badge>
-                                </div>
-                                <Button icon={<LogoutOutlined />} type='danger' onClick={this.logout.bind(this)} style={{ marginRight: '4px' }}>
-                                </Button>
-                            </>
+                            <Button icon={<LogoutOutlined />} type='danger' onClick={this.logout.bind(this)} style={{ marginRight: '4px' }}>
+                            </Button>
                         }
-
-                        {/* <div style={{ display: 'inline-block', marginRight: '4px' }}>
-                            <Select value={environment.language} onChange={this.changeLanguage.bind(this)} showArrow={false}>
-                                <Select.Option value="ko">KO</Select.Option>
-                                <Select.Option value="en">EN</Select.Option>
-                            </Select>
-                        </div> */}
+                        {
+                            auth.hasPermission &&
+                            <Badge count={0}>
+                                <Button icon={<MessageOutlined />} type='primary' onClick={() => { environment.toggleMainDrawer(); }} style={{ marginRight: '4px' }}>
+                                </Button>
+                            </Badge>
+                        }
                     </div>
                 </div>
+                <Drawer
+                    title="다이렉트 메세지"
+                    width='360px'
+                    onClose={() => { environment.toggleMainDrawer(); }}
+                    visible={environment.mainDrawer}
+                >
+                    <Button onClick={() => { environment.toggleSubDrawer(); }}>Click Me</Button>
+                    <Drawer
+                        title="TESA 다독이"
+                        width='360px'
+                        onClose={() => { environment.toggleSubDrawer(); }}
+                        visible={environment.subDrawer}
+                    >
+                        TESA 다독이에 대해서 떠드는 채팅방
+                    </Drawer>
+                </Drawer>
             </div >
         );
     }

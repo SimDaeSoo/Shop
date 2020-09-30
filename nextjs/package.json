@@ -23,7 +23,8 @@
     "react-dom": "16.13.1",
     "react-i18next": "^11.7.0",
     "react-lazyload": "^3.0.0",
-    "scroll-lock": "^2.1.4"
+    "scroll-lock": "^2.1.4",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.1",

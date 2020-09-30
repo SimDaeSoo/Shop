@@ -16,12 +16,12 @@
       "type": "string"
     },
     "thumbnail_order": {
-      "model": "order",
-      "via": "thumbnail_images"
+      "via": "thumbnail_images",
+      "model": "order"
     },
     "detail_order": {
-      "model": "order",
-      "via": "detail_images"
+      "via": "detail_images",
+      "model": "order"
     }
   }
 }
