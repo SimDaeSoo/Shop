@@ -30,9 +30,10 @@ class _App extends App {
     }
 
     componentDidMount() {
-        const { initializeData } = this.props.pageProps;
-        const { user } = initializeData.auth || {};
-        console.log(this.store, user);
+        clearInterval();
+        setInterval(async () => {
+            await this.store.auth.fetchData();
+        }, 500);
     }
 
     render() {

@@ -26,8 +26,11 @@ class OrderDetail extends React.Component {
         IMP.init("imp99962599");
     }
 
-    chat() {
-        message.error('아직 완료되지 않은 기능입니다.');
+    async chat() {
+        const { auth, environment } = this.props;
+        const { order } = this.state;
+        await auth.createRoom(order);
+        environment.toggleMainDrawer();
     }
 
     pay() {
@@ -125,7 +128,7 @@ class OrderDetail extends React.Component {
                                 <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>번호</Tag>{order.phone}</div>
 
                                 <div style={{ textAlign: 'right' }}>
-                                    <Button type='primary' onClick={this.chat} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
+                                    <Button type='primary' onClick={() => this.chat()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
                                         <GiftOutlined />
                                         <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>지원하기</span>
                                     </Button>

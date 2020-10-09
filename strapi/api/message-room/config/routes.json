@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/message-rooms",
+      "handler": "message-room.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/message-rooms/count",
+      "handler": "message-room.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/message-rooms/:id",
+      "handler": "message-room.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/message-rooms",
+      "handler": "message-room.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/message-rooms/:id",
+      "handler": "message-room.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/message-rooms/:id",
+      "handler": "message-room.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

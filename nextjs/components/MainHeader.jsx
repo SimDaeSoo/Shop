@@ -2,12 +2,19 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { withTranslation } from "react-i18next";
 import Router from 'next/router';
-import { Input, Button, Tag, Avatar, Badge, message, Drawer } from 'antd';
-import { GoogleOutlined, LogoutOutlined, UserOutlined, MessageOutlined } from '@ant-design/icons';
+import { Input, Button, Tag, Avatar, Badge, message, Drawer, Comment } from 'antd';
+import { GoogleOutlined, LogoutOutlined, UserOutlined, MessageOutlined, MailOutlined } from '@ant-design/icons';
+import moment from 'moment';
+moment.locale('ko');
 
 @inject('environment', 'auth')
 @observer
 class MainHeader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { roomIndex: undefined, message: '' };
+    }
+
     changeLanguage(language) {
         const { environment } = this.props;
         environment.set('language', language);
@@ -24,6 +31,11 @@ class MainHeader extends React.Component {
         Router.push('/connect/google');
     }
 
+    emailLogin(e) {
+        e.stopPropagation();
+        Router.push('/login');
+    }
+
     logout(e) {
         e.stopPropagation();
         const { auth } = this.props;
@@ -31,8 +43,35 @@ class MainHeader extends React.Component {
         message.info('로그아웃 완료');
     }
 
+    async sendMessage(value) {
+        const { roomIndex } = this.state;
+        const { auth } = this.props;
+        const messageRoom = auth.messageRooms[roomIndex];
+
+        await auth.sendMessage(value, auth.user.id, messageRoom.id);
+
+        this.setState({ message: '' });
+    }
+
+    changeMessage(e) {
+        const message = e.target.value;
+        this.setState({ message })
+    }
+
+    scrollToBottom = () => {
+        if (this.messagesEnd && this.messagesEnd.scrollIntoView) {
+            this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
     render() {
+        const { roomIndex, message } = this.state;
         const { environment, auth, i18n, showSearch } = this.props;
+
         return (
             <div style={{ height: '220px', position: 'relative', marginTop: '8px', marginLeft: '4px', marginRight: '4px' }}>
                 <img src='/assets/logo.jpg' style={{ opacity: 0.6, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
@@ -68,6 +107,12 @@ class MainHeader extends React.Component {
                             </Button>
                         }
                         {
+                            !auth.hasPermission &&
+                            <Button icon={<MailOutlined />} type='danger' onClick={this.emailLogin.bind(this)} style={{ marginRight: '4px' }}>
+                                이메일 {i18n.t('login')}
+                            </Button>
+                        }
+                        {
                             auth.hasPermission &&
                             <Button icon={<LogoutOutlined />} type='danger' onClick={this.logout.bind(this)} style={{ marginRight: '4px' }}>
                             </Button>
@@ -87,14 +132,82 @@ class MainHeader extends React.Component {
                     onClose={() => { environment.toggleMainDrawer(); }}
                     visible={environment.mainDrawer}
                 >
-                    <Button onClick={() => { environment.toggleSubDrawer(); }}>Click Me</Button>
+                    {
+                        auth.messageRooms.map((messageRoom, index) => {
+                            const lastmessage = messageRoom.messages.length ? messageRoom.messages[messageRoom.messages.length - 1] : {};
+                            const roomUsers = messageRoom.users.reduce((acc, value) => {
+                                if (value.id !== (auth.user || {}).id) acc.push(value);
+                                return acc;
+                            }, []);
+
+                            return (
+                                <div key={index} style={{ border: '1px solid grey', borderRadius: '8px', paddingLeft: '10px', marginBottom: '8px', overflow: 'hidden' }}>
+                                    <Comment
+                                        author={`${messageRoom.order.title} - ${roomUsers[0].username}${roomUsers.length > 1 ? ` 외 ${roomUsers.length - 1}명` : ''}`}
+                                        avatar={<Avatar icon={<UserOutlined />} />}
+                                        content={(lastmessage || {}).content || ''}
+                                        datetime={<span>{lastmessage.created_at ? moment((lastmessage || {}).created_at).fromNow() : ''}</span>}
+                                    />
+                                    <Button type='primary' size='small' style={{ marginLeft: '-10px', width: 'calc(100% + 10px)' }} icon={<MessageOutlined />} onClick={() => {
+                                        this.setState({ roomIndex: index, message: '' });
+                                        environment.toggleSubDrawer();
+                                    }} />
+                                </div>
+                            )
+                        })
+                    }
                     <Drawer
-                        title="TESA 다독이"
+                        title={roomIndex !== undefined && auth.messageRooms[roomIndex].order.title || ''}
                         width='360px'
                         onClose={() => { environment.toggleSubDrawer(); }}
                         visible={environment.subDrawer}
                     >
-                        TESA 다독이에 대해서 떠드는 채팅방
+                        <div style={{ height: 'calc(100% - 32px)', overflowY: 'scroll' }}>
+                            <div style={{ paddingLeft: '12px', borderRadius: '4px', marginBottom: '4px', border: '1px solid grey', textAlign: 'center' }}>대화방이 생성되었습니다</div>
+                            {
+                                roomIndex !== undefined &&
+                                auth.messageRooms[roomIndex].messages.map((message, index) => {
+                                    const currentUser = auth.messageRooms[roomIndex].users.filter(user => user.id === message.from)[0];
+
+                                    if ((currentUser || {}).id === auth.user.id) {
+                                        return (
+                                            <div key={index}>
+                                                <Comment
+                                                    author={`${(currentUser || {}).username || '-'}`}
+                                                    content={message.content}
+                                                    datetime={<span>{moment(message.created_at).fromNow()}</span>}
+                                                    style={{ paddingLeft: '12px', borderRadius: '10px', marginBottom: '4px', border: '1px solid coral' }}
+                                                />
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <div key={index}>
+                                                <Comment
+                                                    author={`${(currentUser || {}).username || '-'}`}
+                                                    content={message.content}
+                                                    datetime={<span>{moment(message.created_at).fromNow()}</span>}
+                                                    style={{ paddingLeft: '12px', borderRadius: '10px', marginBottom: '4px', border: '1px solid cornflowerblue' }}
+                                                />
+                                            </div>
+                                        )
+                                    }
+                                })
+                            }
+                            <div style={{ float: "left", clear: "both" }}
+                                ref={(el) => { this.messagesEnd = el; }}>
+                            </div>
+                        </div>
+                        <div style={{ height: '32px' }}>
+                            <Input.Search
+                                placeholder="내용을 입력해 주세요"
+                                value={message}
+                                enterButton={<MessageOutlined />}
+                                onSearch={value => this.sendMessage(value)}
+                                onChange={value => this.changeMessage(value)}
+                                style={{ width: '100%' }}
+                            />
+                        </div>
                     </Drawer>
                 </Drawer>
             </div >

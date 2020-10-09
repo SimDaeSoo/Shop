@@ -25,9 +25,7 @@ class Environment {
     }
 
     @action toggleMainDrawer() {
-        console.log('hello');
         this.mainDrawer = !this.mainDrawer;
-        console.log(this.mainDrawer);
     }
 
     @action toggleSubDrawer() {

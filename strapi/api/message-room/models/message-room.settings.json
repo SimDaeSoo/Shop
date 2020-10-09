@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "message_rooms",
+  "info": {
+    "name": "MessageRoom"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "users": {
+      "plugin": "users-permissions",
+      "collection": "user"
+    },
+    "order": {
+      "model": "order"
+    },
+    "messages": {
+      "via": "message_room",
+      "collection": "message"
+    }
+  }
+}

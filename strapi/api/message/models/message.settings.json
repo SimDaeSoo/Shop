@@ -16,15 +16,9 @@
       "plugin": "users-permissions",
       "model": "user"
     },
-    "to": {
-      "plugin": "users-permissions",
-      "model": "user"
-    },
-    "read": {
-      "type": "boolean"
-    },
-    "order": {
-      "model": "order"
+    "message_room": {
+      "model": "message-room",
+      "via": "messages"
     }
   }
 }

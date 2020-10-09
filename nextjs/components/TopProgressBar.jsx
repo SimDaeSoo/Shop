@@ -32,14 +32,14 @@ window.fetch = async (...args) => {
     }
 };
 
-axios.defaults.onDownloadProgress = e => {
-    NProgress.start();
-}
+// axios.defaults.onDownloadProgress = e => {
+//     NProgress.start();
+// }
 
-axios.interceptors.response.use(response => {
-    NProgress.done(true)
-    return response
-});
+// axios.interceptors.response.use(response => {
+//     NProgress.done(true)
+//     return response
+// });
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", load);
