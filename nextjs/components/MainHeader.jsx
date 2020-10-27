@@ -143,7 +143,7 @@ class MainHeader extends React.Component {
                             return (
                                 <div key={index} style={{ border: '1px solid grey', borderRadius: '8px', paddingLeft: '10px', marginBottom: '8px', overflow: 'hidden' }}>
                                     <Comment
-                                        author={`${messageRoom.order.title} - ${roomUsers[0].username}${roomUsers.length > 1 ? ` 외 ${roomUsers.length - 1}명` : ''}`}
+                                        author={`${messageRoom.order.title} - ${(roomUsers[0] || {}).username}${roomUsers.length > 1 ? ` 외 ${roomUsers.length - 1}명` : ''}`}
                                         avatar={<Avatar icon={<UserOutlined />} />}
                                         content={(lastmessage || {}).content || ''}
                                         datetime={<span>{lastmessage.created_at ? moment((lastmessage || {}).created_at).fromNow() : ''}</span>}

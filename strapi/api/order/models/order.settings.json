@@ -45,6 +45,10 @@
     },
     "location": {
       "type": "json"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

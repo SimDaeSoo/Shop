@@ -150,14 +150,24 @@ async function applyUsers() {
   }
 }
 
-async function main() {
-  await clearPhotos();
-  await clearOrders();
-  await clearUsers();
+async function setOrders() {
+  const orders = await getOrders();
 
-  await applyUsers();
-  await applyOrders();
-  await applyPhotos();
+  for (const order of orders) {
+    await axios.put(`http://www.everywear.site/api/orders/${order.id}`, {disabled: false});
+  }
+}
+
+async function main() {
+  // await clearPhotos();
+  // await clearOrders();
+  // await clearUsers();
+
+  // await applyUsers();
+  // await applyOrders();
+  // await applyPhotos();
+
+  await setOrders();
 }
 
 main();

@@ -8,6 +8,7 @@ import axios from 'axios';
 import MainHeader from '../../components/MainHeader';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import i18n from '../../locales/i18n';
+import Router from 'next/router';
 
 @inject('environment', 'auth')
 @observer
@@ -31,6 +32,13 @@ class OrderDetail extends React.Component {
         const { order } = this.state;
         await auth.createRoom(order);
         environment.toggleMainDrawer();
+    }
+
+    async clearOrder() {
+        const { order } = this.state;
+        await axios.put(`http://www.everywear.site/api/orders/${order.id}`, { disabled: true });
+        message.success('지원 마감되었습니다.');
+        Router.push('/');
     }
 
     pay() {
@@ -128,10 +136,19 @@ class OrderDetail extends React.Component {
                                 <div style={{ display: 'flex', marginTop: '4px' }}><Tag style={{ height: '24px' }}>번호</Tag>{order.phone}</div>
 
                                 <div style={{ textAlign: 'right' }}>
-                                    <Button type='primary' onClick={() => this.chat()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
-                                        <GiftOutlined />
-                                        <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>지원하기</span>
-                                    </Button>
+                                    {
+                                        !auth.hasPermission || (auth.hasPermission && auth.user.id !== order.user.id) &&
+                                        <Button type='primary' onClick={() => this.chat()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
+                                            <GiftOutlined />
+                                            <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>지원하기</span>
+                                        </Button>
+                                    }
+                                    {
+                                        auth.hasPermission && auth.user.id === order.user.id &&
+                                        <Button type='danger' onClick={() => this.clearOrder()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
+                                            <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>지원마감</span>
+                                        </Button>
+                                    }
                                 </div>
                             </Col>
                         </Row>

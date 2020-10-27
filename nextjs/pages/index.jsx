@@ -65,8 +65,8 @@ class Home extends React.Component {
 
 async function getData() {
     const query = `
-        query {
-            orders {
+        query($where: JSON) {
+            orders(where: $where) {
                 id
                 title
                 description
@@ -88,7 +88,7 @@ async function getData() {
         }
     `;
 
-    const response = await axios.post(`${process.env.SSR_API_URL}/graphql`, { query });
+    const response = await axios.post(`${process.env.SSR_API_URL}/graphql`, { query, variables: { where: { disabled: false } } });
     const { data } = response.data || {};
     const { orders } = data;
     return { orders: orders || [] };
