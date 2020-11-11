@@ -30,8 +30,12 @@ class OrderDetail extends React.Component {
     async chat() {
         const { auth, environment } = this.props;
         const { order } = this.state;
-        await auth.createRoom(order);
-        environment.toggleMainDrawer();
+        try {
+            await auth.createRoom(order);
+            environment.toggleMainDrawer();
+        } catch (e) {
+            message.error('이미 진행중인 발주입니다.');
+        }
     }
 
     async clearOrder() {
@@ -66,6 +70,11 @@ class OrderDetail extends React.Component {
                 enablePageScroll();
             }
         });
+    }
+
+    validateBusiness() {
+        const { order } = this.state;
+        window.open(`https://www.bizno.net/?query=${order.user.business_number}`);
     }
 
     componentDidMount() {
@@ -104,6 +113,16 @@ class OrderDetail extends React.Component {
         this.setState({ order: response.data });
     }
 
+    async cancelOrder() {
+        const { order } = this.props;
+        const response = await axios.get(`/api/orders/${order.id}`);
+        const _order = response.data;
+        _order.ordering = false;
+        await axios.put(`/api/orders/${_order.id}`, _order);
+        message.success('발주 진행이 취소되었습니다.');
+        setTimeout(() => Router.reload(), 1000);
+    }
+
     render() {
         const { auth } = this.props;
         const { order } = this.state;
@@ -138,9 +157,21 @@ class OrderDetail extends React.Component {
                                 <div style={{ textAlign: 'right' }}>
                                     {
                                         !auth.hasPermission || (auth.hasPermission && auth.user.id !== order.user.id) &&
-                                        <Button type='primary' onClick={() => this.chat()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
+                                        <Button type='danger' onClick={() => this.validateBusiness()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission}>
+                                            <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>사업자 확인</span>
+                                        </Button>
+                                    }
+                                    {
+                                        (!auth.hasPermission || (auth.hasPermission && auth.user.id !== order.user.id)) &&
+                                        <Button type='primary' onClick={() => this.chat()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission || order.ordering}>
                                             <GiftOutlined />
                                             <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>지원하기</span>
+                                        </Button>
+                                    }
+                                    {
+                                        auth.hasPermission && auth.user.id === order.user.id &&
+                                        <Button type='primary' onClick={() => this.cancelOrder()} style={{ width: '100px', marginRight: '10px' }} disabled={!auth.hasPermission || !order.ordering}>
+                                            <span style={{ marginLeft: '4px', fontSize: '0.8em' }}>진행 취소</span>
                                         </Button>
                                     }
                                     {

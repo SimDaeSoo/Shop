@@ -66,6 +66,9 @@
     },
     "bot": {
       "type": "boolean"
+    },
+    "business_number": {
+      "type": "string"
     }
   }
 }

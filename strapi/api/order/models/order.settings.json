@@ -49,6 +49,10 @@
     "disabled": {
       "type": "boolean",
       "default": false
+    },
+    "ordering": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -52,8 +52,15 @@ class Auth {
     }
 
     async createRoom(order) {
-        console.log(order);
         const { data } = await axios.get(`/api/message-rooms?users_in=${this.user.id}&order=${order.id}`);
+        const response = await axios.get(`/api/orders/${order.id}`);
+        const _order = response.data;
+        
+        if (!_order.ordering) {
+            _order.ordering = true;
+            await axios.put(`/api/orders/${_order.id}`, _order);
+        }
+
         if (!data.length) {
             await axios.post(`/api/message-rooms`, {
                 users: [order.user.id, this.user.id],
