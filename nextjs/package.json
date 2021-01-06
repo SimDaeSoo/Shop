@@ -10,7 +10,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "antd": "^4.4.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-preset-react-app": "^9.1.2",
     "i18next": "^19.6.2",
     "mobx": "^5.15.4",
