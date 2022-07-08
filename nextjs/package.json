@@ -15,7 +15,7 @@
     "i18next": "^19.6.2",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "next": "9.4.4",
     "nprogress": "^0.2.0",
     "querystring": "^0.2.0",
